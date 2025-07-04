@@ -1,4 +1,7 @@
-import './App.css'
+//import './App.css'
+import './layout.css'
+import logo from './img/logo.svg'
+import profile from './img/profile.svg'
 
 function App() {
 
@@ -6,8 +9,9 @@ function App() {
     // article별로 컴포넌트 분리해야 함
     <>
       <header>
-        <img className='logo' />
+        <img className='logo' src={logo}/>
         <div className='login'>
+          <img className='profile' src={profile}></img>
           {/* 가지고 디자인 해보세용 */}
           {/* {isLogin === 'false' ? <button>구글 로그인</button>:<div><img className='profile'></img><p>{userName}</p></div>} */}
         </div>

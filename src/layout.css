@@ -1,6 +1,112 @@
 body{
-  background-color: aquamarine;
+  background-color: #F8F9FA;
+  color: #212529;
 }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+header, main, footer{
+  display: flex;
+  justify-self: center;
+  width: 1024px;
+}
+
+
+/*헤더*/
 header{
-    color: aliceblue;
+  position: relative;
+  padding: 23px 0;
+}
+.logo{
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  height: 54px;
+}
+.login{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.profile{
+  display: block;
+  height: 28px;
+}
+
+
+
+/*메인*/
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 38px;
+}
+
+/*공통 카드 스타일*/
+.goal, .expend{
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* mainHeader */
+.mainHeader{
+  display: flex;
+  gap: 24px;
+}
+.goal ,.expLayout{
+  display: flex;
+}
+
+/* goal */
+.goal{
+  flex-direction: column;
+  padding: 60px 54px;
+  width: 350px;
+}
+.expension{
+  display: flex;
+  flex-direction: column;
+}
+
+/* expend */
+.expend{
+  padding: 45px 62px;
+}
+.expLayout{
+  gap: 50px;
+  align-items: center;
+}
+.AIcomment{
+  width: 310px;
+  height: 150px;
+}
+.graph{
+  width: 160px;
+  height: 210px;
+}
+
+/* expDetail 테이블 */
+.expDetail{
+  height: 450px;
+}
+td{
+  width: 144px;
+}
+
+
+/*Footer*/
+footer{
+  border-top: 1px solid #e0e0e0;
+  height:100px;
 }
