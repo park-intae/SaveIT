@@ -1,33 +1,33 @@
-body{
+/* 공통 */
+body {
   background-color: #F8F9FA;
   color: #212529;
 }
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
-header, main, footer{
-  display: flex;
-  justify-self: center;
-  width: 1024px;
+/* 레이아웃 구조 */
+header, main, footer {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
-
-/*헤더*/
-header{
+/* 헤더 */
+header {
   position: relative;
-  padding: 23px 0;
+  padding: 22px 0;
 }
-.logo{
+.logo {
   display: block;
   margin: 0 auto;
   width: auto;
-  height: 54px;
+  height: clamp(42px, 5vw, 56px);
 }
-.login{
+.login {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -36,77 +36,101 @@ header{
   align-items: center;
   cursor: pointer;
 }
-.profile{
+.profile {
   display: block;
-  height: 28px;
+  height: clamp(24px, 4vw, 28px);
 }
 
-
-
-/*메인*/
-main{
+/* 메인 */
+main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 38px;
 }
 
-/*공통 카드 스타일*/
-.goal, .expend{
+/* 카드 공통 */
+.goal, .expend {
   background-color: #fff;
   border-radius: 16px;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 40px 32px;
 }
 
-/* mainHeader */
-.mainHeader{
+/* 메인 헤더 */
+.mainHeader {
   display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
   gap: 24px;
 }
-.goal ,.expLayout{
+
+/* 좌우 카드 */
+.goal {
+  flex: 0 1 40%;
+  min-width: 300px;
+}
+.expend {
+  flex: 1;
+  min-width: 360px;
+}
+.expension {
   display: flex;
+  flex-direction: column;
 }
 
-/* goal */
-.goal{
-  flex-direction: column;
-  padding: 60px 54px;
-  width: 350px;
-}
-.expension{
+/* 그래프 , AI코멘트 */
+.expLayout {
   display: flex;
-  flex-direction: column;
-}
-
-/* expend */
-.expend{
-  padding: 45px 62px;
-}
-.expLayout{
-  gap: 50px;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  gap: 40px;
+  width: 100%;
 }
-.AIcomment{
-  width: 310px;
-  height: 150px;
+.AIcomment {
+  flex: 2;
+  min-width: 0;
+  text-align: right;
 }
-.graph{
-  width: 160px;
-  height: 210px;
+.graph {
+  flex: 1;
+  height: auto;
+  max-width: 200px;
 }
 
-/* expDetail 테이블 */
-.expDetail{
+/* 캘링더 */
+.expDetail {
   height: 450px;
 }
-td{
+.addExp{
+  cursor: pointer;
+}
+td {
   width: 144px;
 }
 
-
-/*Footer*/
-footer{
+/* 푸터 */
+footer {
   border-top: 1px solid #e0e0e0;
-  height:100px;
+  height: 100px;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .expLayout {
+    flex-direction: column;
+    align-items: center;
+  }
+  .AIcomment, .graph {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
 }
