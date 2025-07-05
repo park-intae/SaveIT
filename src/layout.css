@@ -25,7 +25,8 @@ header {
   display: block;
   margin: 0 auto;
   width: auto;
-  height: clamp(42px, 5vw, 56px);
+  max-height: clamp(40px, 5vw, 56px);
+  height: auto;
 }
 .login {
   position: absolute;
@@ -38,7 +39,7 @@ header {
 }
 .profile {
   display: block;
-  height: clamp(24px, 4vw, 28px);
+  height: clamp(18px, 4vw, 28px);
 }
 
 /* 메인 */
@@ -70,7 +71,7 @@ main {
 
 /* 좌우 카드 */
 .goal {
-  flex: 0 1 40%;
+  flex: 0 1 35%;
   min-width: 300px;
 }
 .expend {
@@ -98,8 +99,7 @@ main {
 }
 .graph {
   flex: 1;
-  height: auto;
-  max-width: 200px;
+  width: clamp(160px, 20vw, 200px);
 }
 
 /* 캘링더 */
@@ -116,21 +116,108 @@ td {
 /* 푸터 */
 footer {
   border-top: 1px solid #e0e0e0;
-  height: 100px;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  line-height: 1.5;
+}
+footer p{
+  padding: 10px 0;
+}
+.footRight{
+  text-align: right;
+}
+
+
+
+/*카드 텍스트*/
+.goalSummary{
+  font-size: 28px;
+  font-weight: bold;
+}
+.goalSummary span{
+  font-size: 15px;
+  font-weight: normal;
+  color: #888;
+}
+.expension{
+  font-size: 18px;
+}
+.expension span{
+  font-size: 15px;
+  color: #888;
 }
 
 
 
 
 @media (max-width: 768px) {
+  header {
+    padding: 24px 16px;
+  }
+  .logo{
+    margin-left: 0;
+    margin-right: auto;
+  }
+  .login {
+    right: 16px;
+  }
+
+  main{
+    padding: 0 16px;
+  }
+  .mainHeader {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .goal, .expend {
+    width: 100%;
+    padding: 32px 24px;
+  }
   .expLayout {
     flex-direction: column;
     align-items: center;
+    gap: 24px;
   }
-  .AIcomment, .graph {
-    flex: none;
+  .AIcomment {
     width: 100%;
-    max-width: 100%;
     text-align: center;
+  }
+
+  footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+  }
+  footer p{
+    display: none;
+  }
+}
+
+
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  header{
+    padding: 22px 24px;
+  }
+  main {
+    padding: 0 24px;
+  }
+  .login {
+    right: 24px;
+  }
+
+  .mainHeader {
+    gap: 20px;
+  }
+  .expLayout {
+    gap: 24px;
+  }
+
+  footer{
+    padding: 24px;
   }
 }
