@@ -1,10 +1,17 @@
+import styled from "styled-components";
 import Table from "./table/Table";
+
+const StyleExpDetail = styled.section`
+  width: 100%;
+  max-width: 1024px;
+  overflow-x: auto;
+`
 
 export default function ExpDetail() {
   return(
-  <section className='expDetail'>
+  <StyleExpDetail className='expDetail'>
     <Table />
-  </section>
+  </StyleExpDetail>
   )
 }
 {/* <p className="Date">000</p> */}

@@ -1,6 +1,7 @@
 import RecordItem from "./RecordItem";
 
 export default function RecordLog({entries = []}) {
+    console.log(`entries = ${entries}`);
     return (
         <article className="log">
             {entries.length > 0 ?
