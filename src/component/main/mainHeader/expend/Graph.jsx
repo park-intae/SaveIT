@@ -1,3 +1,10 @@
+import styled from "styled-components"
+
+const StyleExpGraph = styled.article`
+  flex: 1;
+  width: clamp(160px, 20vw, 200px);
+`
+
 export default function Graph() {
     return (
         <article className='graph'>

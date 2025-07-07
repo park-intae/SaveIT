@@ -1,11 +1,19 @@
+import styled from 'styled-components';
 import ExpDetail from "./expDetail/ExpDetail";
 import MainHeader from "./mainHeader/MainHeader";
 
+const StyleMain = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 38px;
+`
+
 export default function Main() {
     return (
-        <section className="main">
+        <StyleMain className="main">
             <MainHeader />
             <ExpDetail />
-        </section>
+        </StyleMain>
     )
 }
