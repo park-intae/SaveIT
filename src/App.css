@@ -1,76 +1,17 @@
-/* 여기부터는 레이아웃 시각화를 위한 모시깽이니까 수정될 수 있습니다 */
-header, main, footer, section, article, div, p, img,li{
-  border: 1px solid gray;
-  box-sizing: border-box;
+/* 공통 */
+body {
+  background-color: #F8F9FA;
+  color: #212529;
+}
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-header, main, footer{
-  display: flex;
-  justify-self: center;
-  width: 1024px;
-}
-/* header */
-header {
-  display: flex;
-  height: 100px;
-}
-/* main */
-main{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 38px;
-}
-/* mainHeader */
-.mainHeader{
-  display: flex;
-  gap: 24px;
-}
-.goal ,.expLayout{
-  display: flex;
-}
-
-/* goal */
-.goal{
-  flex-direction: column;
-  padding: 60px 54px;
-  width: 350px;
-  height: 300px;
-}
-.expension{
-  display: flex;
-  flex-direction: column;
-}
-/* expend */
-.expend{
-  padding: 45px 62px;
-}
-
-.expLayout{
-  gap: 50px;
-  align-items: center;
-}
-
-.AIcomment{
-  width: 310px;
-  height: 150px;
-}
-
-.graph{
-  width: 160px;
-  height: 210px;
-}
-/* expDetail 테이블 */
-.expDetail{
-  height: 450px;
-}
-td{
-  width: 144px;
-}
-/* footer */
-footer{
-  height:82px;
+/* 레이아웃 구조 */
+header, main, footer {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
 }

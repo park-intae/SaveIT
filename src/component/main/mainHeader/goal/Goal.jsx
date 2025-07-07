@@ -1,11 +1,18 @@
+import styled from "styled-components";
+import StyleCard from "../../../styleComponent/StyleCard";
 import Current from "./Current";
 import Expension from "./Expension";
 
+const GoalCard = styled(StyleCard)`
+  flex: 0 1 35%;
+  min-width: 300px;
+` 
+
 export default function Goal() {
     return (
-        <article className='goal'>
+        <GoalCard className='goal'>
             <Current/>
             <Expension/>
-        </article>
+        </GoalCard>
     )
 }
