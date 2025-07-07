@@ -4,22 +4,32 @@ import mobileLogo from '../../assets/mobile_logo.svg';
 import profile from '../../assets/profile.svg'
 
 const StyleHeader = styled.section`
-  position: relative;
+  max-width: 1024px;
+  margin: 0 auto;
   padding: 22px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+const StyleLeft = styled.section`
+  flex: 1;
+`
+const StyleCenter = styled.section`
+  display: flex;
+  justify-content: center;
+  flex: 1;
 `
 const StyleLogo = styled.img`
   display: block;
-  margin: 0 auto;
   width: auto;
   max-height: clamp(40px, 5vw, 56px);
   height: auto;
 `
-const StyleLogin = styled.div`
-  display: block;
-  margin: 0 auto;
-  width: auto;
-  max-height: clamp(40px, 5vw, 56px);
-  height: auto;
+const StyleRight = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  cursor: pointer;
 `
 const StyleProfile = styled.img`
   display: block;
@@ -30,15 +40,18 @@ export default function Header() {
 
     return (
         <StyleHeader>
-            <picture>
-                <source media="(max-width: 768px)" srcSet={mobileLogo} />
-                <StyleLogo className="logo" src={logo} alt="로고" />
-            </picture>
-            <StyleLogin className='login'>
+            <StyleLeft/>
+            <StyleCenter>
+                <picture>
+                  <source media="(max-width: 768px)" srcSet={mobileLogo} />
+                  <StyleLogo className="logo" src={logo} alt="로고" />
+                </picture>
+            </StyleCenter>
+            <StyleRight className='login'>
                 <StyleProfile className='profile' src={profile}></StyleProfile>
                 {/* 가지고 디자인 해보세용 */}
                 {/* {isLogin === 'false' ? <button>구글 로그인</button>:<div><img className='profile'></img><p>{userName}</p></div>} */}
-            </StyleLogin>
+            </StyleRight>
         </StyleHeader>
     )
 }
