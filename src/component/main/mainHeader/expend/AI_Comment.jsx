@@ -1,9 +1,11 @@
 import styled from "styled-components"
+import { ResponsiveContext } from '../../../../context/ResponsiveProvider';
+import { useContext } from 'react';
 
 const StyleComment = styled.article`
   flex: 2;
   min-width: 0;
-  text-align: right;
+  text-align: ${({ isMobile }) => (isMobile ? "center" : "right")};
 
   h3{
     font-size: 18px;
@@ -19,8 +21,10 @@ const StyleComment = styled.article`
 `
 
 export default function AI_Comment() {
+    const {isMobile} = useContext(ResponsiveContext);
+
     return (
-        <StyleComment>
+        <StyleComment isMobile={isMobile}>
             <article className='AIcomment'>
                 <h3>🍽️  이번 달 가장 많은 소비는 식비입니다</h3>
                 <p>이번 달 식비가 45%로 가장 컸어요.<br />

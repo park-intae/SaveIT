@@ -2,10 +2,12 @@ import styled from "styled-components";
 import StyleCard from "../../../styleComponent/StyleCard";
 import AI_Comment from "./AI_Comment";
 import Graph from "./Graph";
+import { ResponsiveContext } from '../../../../context/ResponsiveProvider';
+import { useContext } from 'react';
 
 const ExpCard = styled(StyleCard)`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${({ isMobile }) => (isMobile ? "column" : "row")};
   justify-content: space-between;
   align-items: center;
   gap: 40px;
@@ -13,8 +15,10 @@ const ExpCard = styled(StyleCard)`
 `
 
 export default function Expend() {
+    const {isMobile, isTablet} = useContext(ResponsiveContext);
+
     return (
-        <ExpCard className="expend">
+        <ExpCard isMobile={isMobile} isTablet={isTablet} className="expend">
             <AI_Comment/>
             <Graph/>
         </ExpCard>
