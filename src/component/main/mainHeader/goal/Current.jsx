@@ -6,8 +6,9 @@ const StyleCurrent = styled.div`
         font-size: 18px;
     }
     .goalSummary {
-    font-size: 28px;
-    font-weight: bold;
+        font-size: 28px;
+        font-weight: bold;
+        padding: 8px 0 15px;
     }
     span{
         font-size: 15px;
