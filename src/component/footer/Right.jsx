@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 const StyleRight = styled.article`
   text-align: right;
+  font-size: 13px;
 `
 
 export default function Right() {
