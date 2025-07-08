@@ -1,22 +1,25 @@
 import styled from 'styled-components';
 import logo from '../../assets/logo.svg';
 import mobileLogo from '../../assets/mobile_logo.svg';
-import profile from '../../assets/profile.svg'
+import profile from '../../assets/profile.svg';
+import { ResponsiveContext } from '../../context/ResponsiveProvider';
+import { useContext } from 'react';
 
 const StyleHeader = styled.section`
   max-width: 1024px;
   margin: 0 auto;
-  padding: 22px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: ${({isMobile, isTablet})=>
+    isMobile ? "24px 16px" : isTablet ? "22px 24px" : "32px 40px"};
 `
 const StyleLeft = styled.section`
-  flex: 1;
+  flex: ${({ isMobile }) => (isMobile ? 0 : 1)};
 `
 const StyleCenter = styled.section`
   display: flex;
-  justify-content: center;
+  justify-content: ${({ isMobile }) => (isMobile ? "center" : "flex-start")};
   flex: 1;
 `
 const StyleLogo = styled.img`
@@ -37,15 +40,13 @@ const StyleProfile = styled.img`
 `
 
 export default function Header() {
+    const {isMobile, isTablet} = useContext(ResponsiveContext);
 
     return (
-        <StyleHeader>
-            <StyleLeft/>
+        <StyleHeader isMobile={isMobile} isTablet={isTablet}>
+            <StyleLeft isMobile={isMobile}/>
             <StyleCenter>
-                <picture>
-                  <source media="(max-width: 768px)" srcSet={mobileLogo} />
-                  <StyleLogo className="logo" src={logo} alt="로고" />
-                </picture>
+                <StyleLogo className="logo" src={isMobile ? mobileLogo : logo} alt="로고"/>
             </StyleCenter>
             <StyleRight className='login'>
                 <StyleProfile className='profile' src={profile}></StyleProfile>
