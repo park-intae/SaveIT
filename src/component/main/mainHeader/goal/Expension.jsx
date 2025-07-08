@@ -3,12 +3,19 @@ import styled from "styled-components"
 const StyleExpension = styled.article`
   display: flex;
   flex-direction: column;
+  font-size: 18px;
+  line-height: 1.5;
+  gap: 6px;
 
+  .totalExpension, .averExpension{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   span{
     font-weight: bold;
     font-size: 15px;
     color: #666;
-    padding-right: 30px;
   }
 `
 
