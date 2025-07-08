@@ -19,8 +19,9 @@ const StyleLeft = styled.section`
 `
 const StyleCenter = styled.section`
   display: flex;
-  justify-content: ${({ isMobile }) => (isMobile ? "center" : "flex-start")};
-  flex: 1;
+  justify-content: flex-start;
+  flex: 0;
+  margin-left: ${({ isMobile }) => (isMobile ? "8vw" : "0")};
 `
 const StyleLogo = styled.img`
   display: block;
@@ -31,7 +32,7 @@ const StyleLogo = styled.img`
 const StyleRight = styled.div`
   display: flex;
   justify-content: flex-end;
-  flex: 1;
+  flex: ${({ isMobile }) => (isMobile ? 0 : 1)};
   cursor: pointer;
 `
 const StyleProfile = styled.img`
@@ -44,11 +45,17 @@ export default function Header() {
 
     return (
         <StyleHeader isMobile={isMobile} isTablet={isTablet}>
-            <StyleLeft isMobile={isMobile}/>
-            <StyleCenter>
-                <StyleLogo className="logo" src={isMobile ? mobileLogo : logo} alt="로고"/>
+            <StyleLeft isMobile={isMobile}>
+                {isMobile && (
+                  <StyleLogo className="logo" src={mobileLogo} alt="로고" />
+                )}
+            </StyleLeft>
+            <StyleCenter isMobile={isMobile}>
+                {!isMobile && (
+                  <StyleLogo className="logo" src={logo} alt="로고" />
+                )}
             </StyleCenter>
-            <StyleRight className='login'>
+            <StyleRight isMobile={isMobile} className='login'>
                 <StyleProfile className='profile' src={profile}></StyleProfile>
                 {/* 가지고 디자인 해보세용 */}
                 {/* {isLogin === 'false' ? <button>구글 로그인</button>:<div><img className='profile'></img><p>{userName}</p></div>} */}
