@@ -1,13 +1,21 @@
+import styled from "styled-components";
 import RecordLog from "./recordLog/RecordLog";
 import RecordSumm from "./RecordSumm";
 
+const StyleTableRecord = styled.article`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 145px;
+`
+
+
 export default function TableRecord({ date, entries }) {
-    console.log("📅 date:", date);
-    console.log("📄 entries:", entries);
     return (
-        <article>
-            <RecordSumm date={date} entries={entries} />
+        <StyleTableRecord>
+            <h3>{date.date}</h3>
+            <RecordSumm entries={entries} />
             <RecordLog entries={entries} />
-        </article>
+        </StyleTableRecord>
     )
 }

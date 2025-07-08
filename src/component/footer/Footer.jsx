@@ -18,7 +18,7 @@ const StyleFooter = styled.footer`
 export default function Footer() {
     return (
         <StyleFooter>
-            <article class='info'>
+            <article className='info'>
                 <p>(주)세이빗 | 대표 Thein 2Team<br />
                     사업자등록번호 123-45-67890 | 통신판매업 신고 2025-서울강남-1234<br />
                     서울특별시 강남구 테헤란로 123, 4층 (06123)</p>

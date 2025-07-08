@@ -7,7 +7,11 @@ export default function GetDate(days) {
         Array.from({ length: days }, (_, idx) => {
             const day = new Date(today);
             day.setDate(today.getDate() + idx);
-            return (day.toISOString().slice(0, 10))
+            return {
+                year: day.getFullYear(),
+                month: day.getMonth()+1,
+                date: day.getDate()
+            }
         })
     )
 }
