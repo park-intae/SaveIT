@@ -9,7 +9,13 @@ const StyleRecordItem = styled.div`
             kind === "소비" ? "#e74c3c" : kind === "저축" ? "#27ae60" : "#333"};
         border-radius: 5px;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
 
+        &:hover{
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+            transform: translateY(-0.3px);
+            }
+            
         .Ilabel {
             padding-left: 5px;
             flex: 0 0 auto;
