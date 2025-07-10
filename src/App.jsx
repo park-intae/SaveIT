@@ -2,15 +2,18 @@ import './App.css'
 import Footer from './component/footer/Footer'
 import Header from './component/header/Header'
 import Main from './component/main/Main'
+import { ResponsiveProvider } from './context/ResponsiveProvider'
 
 function App() {
 
   return (
     // article별로 컴포넌트 분리해야 함
     <>
-      <Header />
-      <Main />
-      <Footer/>
+      <ResponsiveProvider>
+        <Header />
+        <Main />
+        <Footer/>
+      </ResponsiveProvider>
       {/* <footer>
         <article>
           <p>(주)세이빗 | 대표 Thein 2Team<br />
