@@ -71,10 +71,6 @@ export default function Current() {
       <div className="goalSummary">
         <div className="saveMoney">원</div>
 
-        {/* {goals.map((goal, index)=> { */}
-            {/* return ( */}
-              {/* <div key={index}> */}
-
         {visual ?
             <>
             <input value={inputGoal} type="number" required
@@ -86,9 +82,6 @@ export default function Current() {
             <p>{inputGoal}원</p>
         }
         
-              {/* </div> */}
-            {/* ) */}
-        {/* })} */}
 
         {visual ? 
         <button onClick={handleClick} type="button">
