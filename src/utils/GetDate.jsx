@@ -4,7 +4,7 @@ export default function GetDate(range) {
     const today = new Date(Date.now() - offset);
 
     return (
-        Array.from({ length: range * 3 + 1}, (_, idx) => {
+        Array.from({ length: range * 2 + 1}, (_, idx) => {
             const day = new Date(today);
             day.setDate(today.getDate() + ( idx - range));
             return {
