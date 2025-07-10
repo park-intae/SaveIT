@@ -12,6 +12,8 @@ const TableCard = styled(StyleCard)`
     }
 `
 
+console.log("weeklyRecords", weeklyRecords);
+
 export default function Table() {
     // 목업 데이터임
     return (

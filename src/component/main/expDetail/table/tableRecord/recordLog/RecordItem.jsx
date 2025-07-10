@@ -8,6 +8,7 @@ const StyleRecordItem = styled.div`
         border-color: ${({ kind }) =>
             kind === "소비" ? "#e74c3c" : kind === "저축" ? "#27ae60" : "#333"};
         border-radius: 5px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 
         .Ilabel {
             padding-left: 5px;

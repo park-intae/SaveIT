@@ -1,6 +1,6 @@
 import GetDate from "../utils/GetDate";
 
-const dates = GetDate(7);
+const dates = GetDate(2);
 
 const weeklyRecords = [
         {

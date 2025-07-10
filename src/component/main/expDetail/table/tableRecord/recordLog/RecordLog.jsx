@@ -2,8 +2,6 @@ import styled from "styled-components";
 import RecordItem from "./RecordItem";
 import { pulse } from "../../../../../styleComponent/StyleEffect";
 
-console.log('pulse:', pulse);
-
 const StyleLog = styled.article`
     display: flex;
     flex-direction: column;
