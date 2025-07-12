@@ -14,10 +14,42 @@ const StyleCurrent = styled.div`
         font-size: 15px;
         color: #888;
     }
+    .alter {
+        width: 16px;
+        cursor: pointer;
+    }
+    .progressBar {
+        background-color: #eee;
+        border-radius: 999px;
+        height: 14px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 12px;
+    }
+    .fill {
+        background-color: #2F80ED;
+        height: 100%;
+        border-radius: 999px;
+        width: ${(250000 / 500000) * 100}%; /* 현재 값 계산해서 퍼센트 */
+        transition: width 0.4s ease;
+    }
+    .percentText {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 11px;
+        color: #333;
+        font-weight: 500;
+    }
 
 `
 
 export default function Current() {
+    const current = 250000;
+    const goal = 500000;
+    const percent = Math.round((current / goal) * 100);
+    
     return (
         <StyleCurrent>
             <div className='current'>
@@ -26,7 +58,10 @@ export default function Current() {
                     250,000원 <span>/ 500,000원</span>
                     <img className="alter" src={alter} alt="수정하기" />
                 </div>
-                <div className='progressBar'></div>
+                <div className='progressBar'>
+                    <div className='fill' style={{ width: `${percent}%` }} />
+                    <div className='percentText'>{percent}%</div>
+                </div>
             </div>
         </StyleCurrent>
     )
