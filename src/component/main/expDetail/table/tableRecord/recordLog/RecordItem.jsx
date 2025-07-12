@@ -22,18 +22,13 @@ border-color: ${({ kind }) =>
   transform: translateY(-1px) translateZ(0);
 }
 
-@keyframes slideLeft {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-150%); }
-}
+// &:hover .Ilabel.overflowed span {
+//   transform: translateX(-100%);
+// }
 
-&:hover .Ilabel.overflowed span {
-  transform: translateX(-100%);
-}
-
-&:hover .Ivalue.overflowed span {
-  transform: translateX(calc(-100%));
-}
+// &:hover .Ivalue.overflowed span {
+//   transform: translateX(calc(-100%));
+// }
 
 /* .Ilabel과 .Ivalue에 공통 적용되는 스타일 */
 .Ilabel,
@@ -51,6 +46,14 @@ border-color: ${({ kind }) =>
     max-width: 100%;
     transition: transform 1s ease-out;
     }
+
+&:hover .Ilabel.overflowed span {
+  transform: translateX(calc(-1 * var(--labelSlide, 0px)));
+}
+
+&:hover .Ivalue.overflowed span {
+  transform: translateX(calc(-1 * var(--valueSlide, 0px)));
+}
 
 .Ilabel {
   padding-left: 5px;
@@ -71,23 +74,40 @@ export default function RecordItem({ kind, category, amount }) {
   // 인터렉션 애니메이션 관리를 위한 길이 판단
   const labelRef = useRef(null);
   const valueRef = useRef(null);
+
   const [isLabelOverflow, setIsLabelOverflow] = useState(false);
   const [isValueOverflow, setIsValueOverflow] = useState(false);
+
+  const [labelSlide, setLabelSlide] = useState(0);
+  const [valueSlide, setValueSlide] = useState(0);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
       if (labelRef.current) {
-        setIsLabelOverflow(labelRef.current.scrollWidth > labelRef.current.offsetWidth);
+        const label = labelRef.current;
+        const isOverflow = label.scrollWidth > label.offsetWidth
+        setIsLabelOverflow(isOverflow);
+        setLabelSlide(isOverflow ? label.scrollWidth - label.offsetWidth : 0)
       }
       if (valueRef.current) {
-        setIsValueOverflow(valueRef.current.scrollWidth > valueRef.current.offsetWidth);
+        const value = valueRef.current;
+        const isOverflow = value.scrollWidth > value.offsetWidth
+        setIsValueOverflow(isOverflow);
+        setValueSlide(isOverflow ? value.scrollWidth - value.offsetWidth : 0)
       }
     });
     return () => cancelAnimationFrame(id);
   }, [category, amount]);
 
   return (
-    <StyleRecordItem className="RecordItem" kind={kind}>
+    <StyleRecordItem
+      className="RecordItem"
+      kind={kind}
+      style={{
+        "--labelSlide": `${labelSlide}px`,
+        "--valueSlide": `${valueSlide}px`,
+      }}
+    >
       <div className={`Ilabel ${isLabelOverflow ? 'overflowed' : ''}`}>
         <span ref={labelRef}>
           {category}
