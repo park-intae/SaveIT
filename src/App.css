@@ -46,3 +46,7 @@ button:hover {
 button:active {
   transform: scale(0.97);
 }
+
+section, article, div{
+  box-sizing: border-box;
+}

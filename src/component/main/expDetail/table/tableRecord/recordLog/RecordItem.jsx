@@ -11,6 +11,7 @@ border: 1px solid;
 border-radius: 8px;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 transition: box-shadow 0.3s ease, transform 0.3s ease;
+width: 95%;
 
 /* 'kind' 값에 따라 테두리 색상 동적 변경 */
 border-color: ${({ kind }) =>
@@ -21,22 +22,17 @@ border-color: ${({ kind }) =>
   transform: translateY(-1px) translateZ(0);
 }
 
-@keyframes slideLeft1 {
+@keyframes slideLeft {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-150%); }
 }
 
-@keyframes slideRight {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(calc(50% - 100%)); }
-}
-
 &:hover .Ilabel.overflowed span {
-  animation: slideLeft 3s linear infinite alternate;
+  transform: translateX(-100%);
 }
 
 &:hover .Ivalue.overflowed span {
-  transform: translateX(calc(50% - 100%));
+  transform: translateX(calc(-100%));
 }
 
 /* .Ilabel과 .Ivalue에 공통 적용되는 스타일 */
