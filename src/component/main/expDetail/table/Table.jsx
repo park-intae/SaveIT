@@ -5,6 +5,7 @@ import StyleCard from "../../../styleComponent/StyleCard";
 
 const TableCard = styled(StyleCard)`
     display: flex;
+    justify-content: space-around;
     gap: 10px;
     
     li{

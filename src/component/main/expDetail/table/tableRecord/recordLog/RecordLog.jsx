@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import RecordItem from "./RecordItem";
-// import { pulse } from "../../../../../styleComponent/StyleEffect";
 
 const StyleLog = styled.article`
     display: flex;
@@ -8,6 +7,7 @@ const StyleLog = styled.article`
     justify-content: center;
     align-items: center;
     gap: 3px;
+    min-width: 100%;
     max-width: 100%;
 
     ul{

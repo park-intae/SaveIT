@@ -6,9 +6,8 @@ const StyleTableRecord = styled.article`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 117px;
-    min-width: 117px;
-    max-width: 117px;
+    min-width: 130px;
+    max-width: 130px;
 `
 
 
