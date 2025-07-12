@@ -8,7 +8,7 @@ const StyleLog = styled.article`
     justify-content: center;
     align-items: center;
     gap: 3px;
-    width: 100%;
+    max-width: 100%;
 
     ul{
     display: flex;
