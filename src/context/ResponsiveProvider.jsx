@@ -11,9 +11,9 @@ export function ResponsiveProvider({ children }){
         return()=> window.removeEventListener("resize", handleResize);
     },[]);
 
-    const isMobile = windowWidth <= 768;
-    const isTablet = windowWidth > 768 && windowWidth <= 1023;
-    const isDesktop = windowWidth <= 1023;
+    const isMobile = windowWidth < 768;
+    const isTablet = windowWidth >= 768 && windowWidth <= 1023;
+    const isDesktop = windowWidth > 1023;
 
     return(
         <ResponsiveContext.Provider value={{isMobile, isTablet, isDesktop, windowWidth}}>
