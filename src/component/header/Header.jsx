@@ -12,7 +12,7 @@ const StyleHeader = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: ${({isMobile, isTablet})=>
-    isMobile ? "24px 16px" : isTablet ? "22px 24px" : "22px 0"};
+    isMobile ? "24px 16px" : isTablet ? "22px 24px" : "22px 48px"};
 `
 const StyleLeft = styled.section`
   flex: ${({ isMobile }) => (isMobile ? 0 : 1)};
