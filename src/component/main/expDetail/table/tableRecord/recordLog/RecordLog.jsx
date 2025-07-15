@@ -1,5 +1,8 @@
 import styled from "styled-components";
+
 import RecordItem from "./RecordItem";
+import InputItem from "./InputItem/InputItem";
+import { useState } from "react";
 
 const StyleLog = styled.article`
     display: flex;
@@ -39,6 +42,10 @@ const StyleLog = styled.article`
 `
 
 export default function RecordLog({ entries = [] }) {
+    const [showInput, setShowInput] = useState(false);
+
+    const toggleInput = () => setShowInput((prev) => !prev);
+
     return (
         <StyleLog className="log">
             {entries.length > 0 && (
@@ -51,7 +58,8 @@ export default function RecordLog({ entries = [] }) {
                 </ul>
             )}
 
-            <button>+</button>
+            <button onClick={toggleInput}>+</button>
+            {showInput && <InputItem />}
         </StyleLog>
     )
 }

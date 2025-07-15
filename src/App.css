@@ -7,7 +7,7 @@
 }
 
 /* 공통 */
-body {
+body textarea{
   font-family: 'Pretendard-Regular';
   background-color: #F8F9FA;
   color: #212529;
