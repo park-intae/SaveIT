@@ -7,7 +7,7 @@
 }
 
 /* 공통 */
-body {
+body textarea{
   font-family: 'Pretendard-Regular';
   background-color: #F8F9FA;
   color: #212529;
@@ -45,4 +45,8 @@ button:hover {
 
 button:active {
   transform: scale(0.97);
+}
+
+section, article, div{
+  box-sizing: border-box;
 }
