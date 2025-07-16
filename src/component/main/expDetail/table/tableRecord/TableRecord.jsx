@@ -6,13 +6,14 @@ const StyleTableRecord = styled.article`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 145px;
+    min-width: 130px;
+    max-width: 130px;
 `
 
 
 export default function TableRecord({ date, entries }) {
     return (
-        <StyleTableRecord>
+        <StyleTableRecord className="tableRecord">
             <h3>{date.date}</h3>
             <RecordSumm entries={entries} />
             <RecordLog entries={entries} />

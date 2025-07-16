@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyleSumm = styled.article`
     border-top: 1px solid #666666;
     margin: 8px 0;
+    padding: 4px 0;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -15,11 +16,13 @@ const StyleSumm = styled.article`
     }
 
     .label {
-        padding-left: 10px;
+        padding-left: 5px;
         flex: 0 0 auto;
     }
 
     .value {
+        padding-right: 5px;
+        color: black;
         flex: 1 1 auto;
         text-align: right;
     }
