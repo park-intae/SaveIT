@@ -9,7 +9,7 @@ const StyleFooter = styled.footer`
   border-top: 1px solid #e0e0e0;
   margin-top: 33px;
   padding: ${({isMobile, isTablet})=>
-    isMobile ? "30px 16px" : isTablet ? "24px" : "0"};
+    isMobile ? "16px" : isTablet ? "24px" : "24px 48px"};
   display: flex;
   justify-content: ${({isMobile, isTablet}) =>
     isMobile || isTablet ? "center" : "space-between"};

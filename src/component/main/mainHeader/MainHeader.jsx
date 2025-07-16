@@ -14,7 +14,7 @@ const StyleMainHeader = styled.section`
   margin: 0 auto;
   gap: 24px;
   padding: ${({isMobile, isTablet})=>
-    isMobile ? "0 16px" : isTablet ? "0 24px" : "0"};
+    isMobile ? "0 16px" : isTablet ? "0 24px" : "0 48px"};
 `
 
 export default function MainHeader() {
