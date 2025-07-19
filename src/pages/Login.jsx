@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import logo from '../assets/login_logo.svg';
+import useTokenStore from '../store/useTokenStore';
+import { useEffect } from 'react';
+// import logo from '../assets/login_logo.svg';
 
 const LoginWrapper = styled.div`
   min-height: 100vh;
@@ -87,9 +89,12 @@ const FootRight = styled.div`
 
 function Login() {
   const navigate = useNavigate();
+  const { setToken } = useTokenStore();
 
   const handleLoginSuccess = async (credentialResponse) => {
     const idToken = credentialResponse.credential;
+
+
     console.log("idToken:", idToken);
     try {
       const res = await axios.post(
@@ -105,6 +110,7 @@ function Login() {
 
       const jwt = res.data.jwt;
       localStorage.setItem("jwt", jwt);
+      setToken(jwt);
       alert("로그인 성공!");
 
       const userRes = await axios.get("http://localhost:8080/user/info", {
@@ -124,7 +130,7 @@ function Login() {
   return (
     <LoginWrapper>
       <LoginLogo>
-          <StyleLogo className="logo" src={logo} alt="로고" />
+          {/* <StyleLogo className="logo" src={logo} alt="로고" /> */}
       </LoginLogo>
       <LoginBtn>
         <GoogleLogin
