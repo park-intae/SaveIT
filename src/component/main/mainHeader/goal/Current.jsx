@@ -1,6 +1,10 @@
 import alter from '../../../../assets/pencil.svg'
 import styled from 'styled-components';
 
+import { useEffect, useRef, useState } from "react";
+import { getUserGoal, postUserGoal } from "../../../../api/goal.js";
+
+
 const StyleCurrent = styled.div`
     p {
         font-size: 18px;
@@ -32,7 +36,7 @@ const StyleCurrent = styled.div`
         border-radius: 999px;
         width: ${(250000 / 500000) * 100}%; /* 현재 값 계산해서 퍼센트 */
         transition: width 0.4s ease;
-    }
+    } 
     .percentText {
         position: absolute;
         right: 10px;
@@ -45,11 +49,7 @@ const StyleCurrent = styled.div`
 
 `
 
-import { useEffect, useRef, useState } from "react";
-import { UserData } from "../../../../api/user.js";
-
 export default function Current() {
-<<<<<<< HEAD
 
   const [visual, setVisual] = useState(false)
   const [inputGoal, setInputGoal] = useState("")
@@ -60,11 +60,14 @@ export default function Current() {
   const [user, setUser] = useState([])
 
   useEffect(()=> {
-    UserData()
-    .then((res)=> {setUser(res.data)
-                   setInputGoal(res.data[0]?.finalGoal)})
+    getUserGoal()
+    .then((res)=> {setUser(res)
+      console.log(res)
+                   setInputGoal(res.goalAmount)
+                  })
     .catch((err) => console.error("데이터 불러오기 실패", err))
   }, [])
+
 
   // console.log(goals)
  
@@ -101,7 +104,7 @@ export default function Current() {
   const handleClick = async ()=> {
     setVisual(false)
     try {
-        const result = await UserData(inputGoal)
+        const result = await postUserGoal(inputGoal)
         console.log("서버 응답: ", result);
     } catch (err) {
         console.error("에러 발생: ", err.message);
@@ -145,25 +148,4 @@ export default function Current() {
       <div className="progressBar"></div>
     </div>
   );
-=======
-    const current = 250000;
-    const goal = 500000;
-    const percent = Math.round((current / goal) * 100);
-    
-    return (
-        <StyleCurrent>
-            <div className='current'>
-                <p>목표달성 현황</p>
-                <div className='goalSummary'>
-                    250,000원 <span>/ 500,000원</span>
-                    <img className="alter" src={alter} alt="수정하기" />
-                </div>
-                <div className='progressBar'>
-                    <div className='fill' style={{ width: `${percent}%` }} />
-                    <div className='percentText'>{percent}%</div>
-                </div>
-            </div>
-        </StyleCurrent>
-    )
->>>>>>> origin/master
 }
