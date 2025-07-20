@@ -9,12 +9,11 @@ const StyleTableRecord = styled.article`
     min-width: 130px;
     max-width: 130px;
 `
-
-
 export default function TableRecord({ date, entries }) {
+    console.log(entries);
     return (
         <StyleTableRecord className="tableRecord">
-            <h3>{date.date}</h3>
+            <h3>{date}</h3>
             <RecordSumm entries={entries} />
             <RecordLog entries={entries} />
         </StyleTableRecord>

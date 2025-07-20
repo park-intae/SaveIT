@@ -99,6 +99,8 @@ export default function RecordItem({ kind, category, amount }) {
     return () => cancelAnimationFrame(id);
   }, [category, amount]);
 
+  console.log(`RecordItem- kind:${kind}, category=${category}, amount=${amount}`);
+
   return (
     <StyleRecordItem
       className="RecordItem"
@@ -114,9 +116,7 @@ export default function RecordItem({ kind, category, amount }) {
         </span>
       </div>
       <div className={`Ivalue ${isValueOverflow ? 'overflowed' : ''}`}>
-        <span ref={valueRef}>
-          ₩{amount.toLocaleString()}
-        </span>
+        {typeof amount === 'number' ? `₩${amount.toLocaleString()}` : '데이터 없음'}
       </div>
     </StyleRecordItem>
   )
