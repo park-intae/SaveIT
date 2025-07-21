@@ -1,40 +1,30 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { addDate, getDateString } from '../utils/dateUtil';
 
-export default function useAddItem(setDate, cardWidth) {
+export default function useAddItem(dateArray, setDateArray, maxCount = 7) {
   const containerRef = useRef(null);
 
+  // 이전 날짜 데이터 추가
   const addPrevDate = () => {
-    const first = new Date(deteArray[0]);
+    const first = new Date(dateArray[0]);
     const newDate = getDateString(addDate(first, -1));
-    if (dateArray.include(newDate)) return;
+    if (dateArray.includes(newDate)) return;
 
-    // 현재 위치 기억
-    const prevScrollLeft = containerRef.current?.scrollLeft || 0;
-
-    setDateArray((prev) => [newDate, ...prev]);
-
-    // 카드 왼쪽에 추가, 위치 이동
-    requestAnimationFrame(() => {
-      if (containerRef.current) {
-        containerRef.current.scrollLeft = prevScrollLeft + cardWidth;
-      }
+    setDateArray((prev) => {
+      const updated = [newDate, ...prev];
+      return updated.length > maxCount ? updated.slice(0, maxCount) : updated;
     });
   };
 
+  // 다음 날짜 추가
   const addNextDate = () => {
     const last = new Date(dateArray[dateArray.length - 1]);
     const newDate = getDateString(addDate(last, 1));
-    if (dateArray.include(newDate)) return;
+    if (dateArray.includes(newDate)) return;
 
-    const prevScrollLeft = containerRef.current?.scrollLeft || 0;
-
-    setDateArray((prev) => [...prev, newDate]);
-
-    requestAnimationFrame(() => {
-      if (containerRef.current) {
-        containerRef.current.scrollLeft = prevScrollLeft + cardWidth;
-      }
+    setDateArray((prev) => {
+      const updated = [...prev, newDate];
+      return updated.length > maxCount ? updated.slice(-maxCount) : updated;
     });
   };
 

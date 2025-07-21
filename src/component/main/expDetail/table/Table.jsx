@@ -7,14 +7,10 @@ import useAddItem from '../../../../hooks/useAddItem';
 
 export default function Table() {
   const { weeklyRecords, fetchWeeklyRecords, isLoading, error } = useWeeklyStore();
-  const [dates, setDates] = useState(() => {
-    const today = new Date();
-    const formatted = getDateString(today);
-    return [formatted];
-  });
 
-  const today = getDateString(new Date());
+  const today = getDateString(new Date()); // 오늘 날짜 확인
 
+  // 처음 랜더링될 때 기준 상태
   const [date, setDate] = useState(() => {
     const arr = [];
     for (let i = -3; i <= 3; i++) {
@@ -23,18 +19,9 @@ export default function Table() {
     return arr;
   });
 
-  const addPrevDate = () => {
-    const first = date[0];
-    const newDate = getDateString(addDate(first, -1));
-    setDate((prev) => [newDate, ...prev]);
-  };
+  const { addPrevDate, addNextDate } = useAddItem(date, setDate, 7); // 날짜 추가/제거 상태 관리
 
-  const addNextDate = () => {
-    const last = date[date.length - 1];
-    const newDate = getDateString(addDate(last, 1));
-    setDate((prev) => [...prev, newDate]);
-  };
-
+  // 캘린더 비동기화
   useEffect(() => {
     const fetchRecords = async () => {
       try {
@@ -46,6 +33,7 @@ export default function Table() {
     fetchRecords();
   }, []);
 
+  // 데이터 기록 수신
   const dateRecords = useMemo(() => {
     const map = {};
     weeklyRecords.forEach((res) => {
@@ -60,29 +48,22 @@ export default function Table() {
     return map;
   }, [weeklyRecords]);
 
-  const CARD_WIDTH = 120;
-
-  const containerRef = useAddItem(setDate, CARD_WIDTH);
-
   if (isLoading) return '데이터를 불러오는 중입니다';
   if (error) return <p>에러발생: {error}</p>;
 
   return (
     <>
-      <TableCard ref={containerRef} className="table">
-        <button className="" onClick={addPrevDate}>
+      <TableCard className="table">
+        <button className="slipDateButton" onClick={addPrevDate}>
           &lt;
         </button>
         {date.map((dateStr) => {
           return <TableRecord key={dateStr} date={dateStr} entries={dateRecords[dateStr] || []} />;
         })}
-        <button onClick={addNextDate}>&gt;</button>
+        <button className="slipDateButton" onClick={addNextDate}>
+          &gt;
+        </button>
       </TableCard>
     </>
   );
 }
-
-// Error:
-// Table.jsx:88 Unexpected ref object provided for article. Use either a ref-setter function or React.createRef().
-// styled-component로 만든 TableCard가 가상 DOM에서 작동함 > ref가 DOM까지 전달이 안됨
-// 스타일컴포넌트를 분리시키면 됨
