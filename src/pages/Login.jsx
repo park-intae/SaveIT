@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import axios from "axios";
-import { GoogleLogin } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { GoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { CallQuote } from '../utils/quote';
 import logo from '../assets/login_logo.svg';
+import { translateText } from '../utils/translateText';
 
 const LoginWrapper = styled.div`
   min-height: 100vh;
@@ -14,19 +17,19 @@ const LoginWrapper = styled.div`
 const LoginLogo = styled.div`
   width: 100%;
   margin-bottom: 6rem;
-`
+`;
 const StyleLogo = styled.img`
   display: block;
   width: auto;
   height: auto;
   margin: 0 auto;
-`
+`;
 const LoginBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 3rem;
-`
+`;
 const Quote = styled.div`
   display: flex;
   flex-direction: column;
@@ -44,7 +47,7 @@ const Quote = styled.div`
     font-size: 14px;
     color: #999;
   }
-`
+`;
 const LoginFooter = styled.footer`
   max-width: 1024px;
   width: 100%;
@@ -56,7 +59,7 @@ const LoginFooter = styled.footer`
   flex-wrap: wrap;
   font-size: 13px;
 
-  p{
+  p {
     margin: 4px 0;
     line-height: 1.4;
   }
@@ -64,9 +67,9 @@ const LoginFooter = styled.footer`
     margin-top: 6px;
     display: block;
   }
-`
+`;
 const FootLeft = styled.div`
-  display: block  ;
+  display: block;
   flex: 3;
 `;
 const FootRight = styled.div`
@@ -77,77 +80,98 @@ const FootRight = styled.div`
   align-items: flex-end;
   text-align: right;
 
-  span{
+  span {
     display: block;
     text-align: center;
     margin-top: 8px;
   }
-`
-;
-
+`;
 function Login() {
   const navigate = useNavigate();
+  const [quote, setQuote] = useState(null);
+
+  useEffect(() => {
+    CallQuote(['business', 'success', 'famous-qutes']).then(setQuote);
+
+    // 번역 버전인데 cors 오류 있어서 백단이랑 같이 처리해야됨
+    // (async () => {
+    //   const raw = await CallQuote(['business', 'success', 'famous-qutes']); // 명언 api 호출
+    //   const translated = await translateText(raw.content); // 번역 api 호출
+    //   setQuote({
+    //     original: raw.content,
+    //     translated,
+    //     author: raw.author,
+    //   });
+    // })(); // 즉시 시행;
+  }, []);
+
+  // //명언 비동기 대기
+  // if (!quote) return <p>불러오는 중...</p>;
 
   const handleLoginSuccess = async (credentialResponse) => {
     const idToken = credentialResponse.credential;
-    console.log("idToken:", idToken);
+    console.log('idToken:', idToken);
     try {
       const res = await axios.post(
-        "http://localhost:8080/auth/google",
+        'http://localhost:8080/auth/google',
         { token: idToken },
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           withCredentials: true,
         }
       );
 
       const jwt = res.data.jwt;
-      localStorage.setItem("jwt", jwt);
-      alert("로그인 성공!");
+      localStorage.setItem('jwt', jwt);
+      alert('로그인 성공!');
 
-      const userRes = await axios.get("http://localhost:8080/user/info", {
+      const userRes = await axios.get('http://localhost:8080/user/info', {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
       });
 
-      console.log("로그인한 유저:", userRes.data);
+      console.log('로그인한 유저:', userRes.data);
 
-      navigate("/main"); // 페이지 이동
+      navigate('/main'); // 페이지 이동
     } catch (error) {
-      console.error("로그인 처리 중 에러:", error);
+      console.error('로그인 처리 중 에러:', error);
     }
   };
 
   return (
     <LoginWrapper>
       <LoginLogo>
-          <StyleLogo className="logo" src={logo} alt="로고" />
+        <StyleLogo className="logo" src={logo} alt="로고" />
       </LoginLogo>
       <LoginBtn>
-        <GoogleLogin
-        ux_mode="popup"
-        onSuccess={handleLoginSuccess}
-        onError={() => console.log("구글 로그인 실패")}
-        />
+        <GoogleLogin ux_mode="popup" onSuccess={handleLoginSuccess} onError={() => console.log('구글 로그인 실패')} />
       </LoginBtn>
-      <Quote>
-        <h1>❝ 절약은 가장 확실한 수입이다. ❞</h1>
-        <p>─ 벤자민 프랭클린</p>
-      </Quote>
+      {quote ? (
+        <Quote>
+          <h1>"{quote.content}"</h1>
+          <p>— {quote.author}</p>
+        </Quote>
+      ) : (
+        <p>명언을 불러오는 중...</p>
+      )}
       <LoginFooter>
-          <FootLeft>
-            <p>(주)세이빗 | 대표 Thein 2Team<br />
-                사업자등록번호 123-45-67890 | 통신판매업 신고 2025-서울강남-1234<br />
-                서울특별시 강남구 테헤란로 123, 4층 (06123)</p>
-            <p>고객센터 1588-1234 (평일 09:00~18:00) | E-mail support@saveit.co.kr</p>
-          </FootLeft>
-          <FootRight>
-            <p>이용약관 | 개인정보처리방침 | 전자금융거래약관 | 청소년보호정책</p>
-            <span>© 2025 SaveIT, Inc. All rights reserved.</span>
-          </FootRight>
+        <FootLeft>
+          <p>
+            (주)세이빗 | 대표 Thein 2Team
+            <br />
+            사업자등록번호 123-45-67890 | 통신판매업 신고 2025-서울강남-1234
+            <br />
+            서울특별시 강남구 테헤란로 123, 4층 (06123)
+          </p>
+          <p>고객센터 1588-1234 (평일 09:00~18:00) | E-mail support@saveit.co.kr</p>
+        </FootLeft>
+        <FootRight>
+          <p>이용약관 | 개인정보처리방침 | 전자금융거래약관 | 청소년보호정책</p>
+          <span>© 2025 SaveIT, Inc. All rights reserved.</span>
+        </FootRight>
       </LoginFooter>
     </LoginWrapper>
   );
