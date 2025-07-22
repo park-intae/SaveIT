@@ -58,7 +58,7 @@ export default function RecordLog({ entries = [] }) {
       )}
 
       <button className="addButton" onClick={toggleInput}>
-        +
+        <img src="C:\Users\pit19\OneDrive\바탕 화면\프로그래밍\SaveIT\src\assets\add.svg"/>
       </button>
       {showInput && <InputItem />}
     </StyleLog>
