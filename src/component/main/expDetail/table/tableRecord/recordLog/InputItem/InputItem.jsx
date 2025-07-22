@@ -1,21 +1,35 @@
 import styled, { keyframes } from "styled-components"
 import close from '../../../../../../../assets/close.svg';
 import add from '../../../../../../../assets/add.svg';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 
-const SlideFade = keyframes`
+const SlideFadein = keyframes`
     from{
-        opacity:0;
-        transform: translateY(-20px);
+      opacity:0;
+      transform: translateY(-20px);
     }
     
     to{
-        opacity:1;
-        transform: translate(0);
+      opacity:1;
+      transform: translate(0);
     }
 `
 
+const SlideFadeout = keyframes`
+  from{
+    opacity: 1;
+    transform: translate(0);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+`
+
 const StyledInputForm = styled.form`
-  animation: ${SlideFade} 0.5s ease-out;
+  animation: ${(props) => (props.$isClosing ? SlideFadeout : SlideFadein)} 0.5s ease-out;
+  animation-fill-mode: forwards;
 
   display: flex;
   flex-direction: column;
@@ -110,44 +124,71 @@ const StyledInputForm = styled.form`
   }
 `;
 
-export default function InputItem() {
-    return (
-        <StyledInputForm>
-            <h3>입력창</h3>
-            <article>
-                <fieldset>
-                    <input type="radio" id="spend" name="kind" value="지출" />
-                    <label htmlFor="spend">지출</label>
+const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef }, ref) {
+  const [isClosing, setIsClosing] = useState(false);
+  const localRef = useRef(null);
 
-                    <input type="radio" id="save" name="kind" value="저축" />
-                    <label htmlFor="save">저축</label>
-                </fieldset>
-                <select id="category" defaultValue="">
-                    <option value="" disabled>카테고리</option>
-                    <option value="식비">식비</option>
-                    <option value="교통비">교통비</option>
-                    <option value="의료">의료</option>
-                    <option value="통신비">통신비</option>
-                    <option value="주거/관리비">주거/관리비</option>
-                    <option value="경조사">경조사</option>
-                    <option value="기타">기타</option>
-                </select>
-                <input id="money" type="number" placeholder="금액 입력란"></input>
-                <textarea
-                    id="memo"
-                    rows={3}
-                    maxLength={30}
-                    placeholder="메모를 작성해주세요"
-                />
-            </article>
-            <div className="button-group">
-                <button className="toolkit">
-                  <img src={close}></img>
-                </button>
-                <button className="toolkit">
-                  <img src={add}></img>
-                </button>
-            </div>
-        </StyledInputForm>
-    )
-}
+  useImperativeHandle(ref, () => ({
+    reqClose(){
+      setIsClosing(true);
+    }
+  }));
+
+  const handleAnimationEnd = () => {
+    if (isClosing) {
+      onReqClose();
+    }
+  };
+
+  useEffect(() => {
+    if (exposeDomRef && localRef.current) {
+      exposeDomRef(localRef.current);
+    }
+  }, [exposeDomRef]);
+
+  const handleCloseClick = () => {
+    setIsClosing(true);
+  }
+
+  return (
+    <StyledInputForm ref={localRef} $isClosing={isClosing} onAnimationEnd={handleAnimationEnd}>
+      <h3>입력창</h3>
+      <article>
+        <fieldset>
+          <input type="radio" id="spend" name="kind" value="지출" />
+          <label htmlFor="spend">지출</label>
+
+          <input type="radio" id="save" name="kind" value="저축" />
+          <label htmlFor="save">저축</label>
+        </fieldset>
+        <select id="category" defaultValue="">
+          <option value="" disabled>카테고리</option>
+          <option value="식비">식비</option>
+          <option value="교통비">교통비</option>
+          <option value="의료">의료</option>
+          <option value="통신비">통신비</option>
+          <option value="주거/관리비">주거/관리비</option>
+          <option value="경조사">경조사</option>
+          <option value="기타">기타</option>
+        </select>
+        <input id="money" type="number" placeholder="금액 입력란"/>
+        <textarea
+          id="memo"
+          rows={3}
+          maxLength={30}
+          placeholder="메모를 작성해주세요"
+        />
+      </article>
+      <div className="button-group">
+        <button type="button" className="toolkit" onClick={handleCloseClick}>
+          <img src={close}></img>
+        </button>
+        <button type="button" className="toolkit" onClick={handleCloseClick}>
+          <img src={add}></img>
+        </button>
+      </div>
+    </StyledInputForm>
+  )
+});
+
+export default InputItem;

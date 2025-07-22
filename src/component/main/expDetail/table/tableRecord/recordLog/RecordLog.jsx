@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import RecordItem from './RecordItem';
 import InputItem from './InputItem/InputItem';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import add from '../../../../../../assets/add.svg';
 
 const StyleLog = styled.article`
@@ -48,9 +48,38 @@ const StyleLog = styled.article`
 `;
 
 export default function RecordLog({ entries = [] }) {
+  // 입력창 여닫기를 위한 판단
   const [showInput, setShowInput] = useState(false);
 
+  const inputComponentRef = useRef(null);
+  const domRef = useRef(null);
+
   const toggleInput = () => setShowInput((prev) => !prev);
+  const closeInput = () => setShowInput(false);
+
+  const handleExposeDomRef = (node) => {
+    domRef.current = node;
+  };
+
+  // 입력창 외부 클릭 감지 후 동작
+  useEffect(() => {
+    function handleClickOut(e) {
+      if (domRef.current && !domRef.current.contains(e.target)) {
+        // 애니메이션 닫기 요청 메서드 호출
+        if (inputComponentRef.current?.reqClose) {
+          inputComponentRef.current.reqClose();
+        }
+      }
+    }
+
+    if (showInput) {
+      document.addEventListener('mousedown', handleClickOut);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOut);
+    }
+  }, [showInput])
 
   return (
     <StyleLog className="log">
@@ -65,9 +94,14 @@ export default function RecordLog({ entries = [] }) {
       )}
 
       <button className="addButton" onClick={toggleInput}>
-        <img className="buttonImg" src={add}/>
+        <img className="buttonImg" src={add} />
       </button>
-      {showInput && <InputItem />}
+      {showInput && 
+        <InputItem ref={inputComponentRef}
+          exposeDomRef={handleExposeDomRef}
+          onReqClose={closeInput}
+        />
+      }
     </StyleLog>
   );
 }
