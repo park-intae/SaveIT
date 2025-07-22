@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import RecordItem from './RecordItem';
 import InputItem from './InputItem/InputItem';
 import { useState } from 'react';
+import add from '../../../../../../assets/add.svg';
 
 const StyleLog = styled.article`
   display: flex;
@@ -27,15 +28,21 @@ const StyleLog = styled.article`
   }
 
   .addButton {
-    font-size: 13px;
     width: 20px;
     height: 20px;
     padding: 1px;
     border-radius: 100%;
     transition: box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 
     &:hover {
       box-shadow: 0 0 0 2px rgb(230, 230, 255);
+    }
+  
+    .buttonImg{
+      margin: auto;
     }
   }
 `;
@@ -58,7 +65,7 @@ export default function RecordLog({ entries = [] }) {
       )}
 
       <button className="addButton" onClick={toggleInput}>
-        <img src="C:\Users\pit19\OneDrive\바탕 화면\프로그래밍\SaveIT\src\assets\add.svg"/>
+        <img className="buttonImg" src={add}/>
       </button>
       {showInput && <InputItem />}
     </StyleLog>

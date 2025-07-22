@@ -1,4 +1,6 @@
 import styled, { keyframes } from "styled-components"
+import close from '../../../../../../../assets/close.svg';
+import add from '../../../../../../../assets/add.svg';
 
 const SlideFade = keyframes`
     from{
@@ -24,8 +26,8 @@ const StyledInputForm = styled.form`
   width: 100%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 
-  h2 {
-    font-size: 24px;
+  h3 {
+    font-size: 18px;
     font-weight: bold;
     margin: 0;
   }
@@ -58,11 +60,21 @@ const StyledInputForm = styled.form`
     }
 
     label:first-of-type {
-      border-color: #f4c2d7; /* 연핑크 */
+      border-color: #EF8479; /* 연핑크 */
     }
 
     label:last-of-type {
       border-color: #b0eac8; /* 연초록 */
+    }
+
+    input[type="radio"]:first-of-type:checked + label {
+      background-color: #EF8479;
+      color: white;
+    }
+
+    input[type="radio"]:last-of-type:checked + label {
+      background-color: #A2E1BD;
+      color: white;
     }
   }
 
@@ -79,23 +91,21 @@ const StyledInputForm = styled.form`
   .button-group {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
+    gap: 5px;
 
-    button {
-      border: 2px solid;
-      border-radius: 12px;
-      width: 48px;
-      height: 48px;
-      font-size: 20px;
+    .toolkit {
+      padding: 0;
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
       cursor: pointer;
-    }
-
-    button:first-of-type {
-      border-color: #ccc;
-    }
-
-    button:last-of-type {
-      border-color: #b2c7f8;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      
+      img{
+        margin: auto;      
+      }
     }
   }
 `;
@@ -109,10 +119,11 @@ export default function InputItem() {
                     <input type="radio" id="spend" name="kind" value="지출" />
                     <label htmlFor="spend">지출</label>
 
-                    <input type="radio" id="save" name="kind" value="저축" /><label htmlFor="save">저축</label>
+                    <input type="radio" id="save" name="kind" value="저축" />
+                    <label htmlFor="save">저축</label>
                 </fieldset>
                 <select id="category" defaultValue="">
-                    <option value="" disabled selected>카테고리</option>
+                    <option value="" disabled>카테고리</option>
                     <option value="식비">식비</option>
                     <option value="교통비">교통비</option>
                     <option value="의료">의료</option>
@@ -129,9 +140,13 @@ export default function InputItem() {
                     placeholder="메모를 작성해주세요"
                 />
             </article>
-            <div>
-                <button></button>
-                <button></button>
+            <div className="button-group">
+                <button className="toolkit">
+                  <img src={close}></img>
+                </button>
+                <button className="toolkit">
+                  <img src={add}></img>
+                </button>
             </div>
         </StyledInputForm>
     )
