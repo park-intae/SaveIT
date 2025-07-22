@@ -3,9 +3,9 @@ import axios from 'axios';
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { CallQuote } from '../utils/quote';
 import logo from '../assets/login_logo.svg';
-import { translateText } from '../utils/translateText';
+import { CallQuote } from '../utils/callQuote';
+// import { translateText } from '../utils/translateText'; 번역기능 import
 
 const LoginWrapper = styled.div`
   min-height: 100vh;
@@ -91,7 +91,7 @@ function Login() {
   const [quote, setQuote] = useState(null);
 
   useEffect(() => {
-    CallQuote(['business', 'success', 'famous-qutes']).then(setQuote);
+    CallQuote(['business', 'success', 'famous-quotes']).then(setQuote);
 
     // 번역 버전인데 cors 오류 있어서 백단이랑 같이 처리해야됨
     // (async () => {
