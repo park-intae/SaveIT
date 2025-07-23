@@ -11,17 +11,17 @@ const StyleHeader = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({isMobile, isTablet})=>
-    isMobile ? "24px 16px" : isTablet ? "22px 24px" : "22px 48px"};
+  padding: ${({$isMobile, $isTablet})=>
+    $isMobile ? "24px 16px" : $isTablet ? "22px 24px" : "22px 48px"};
 `
 const StyleLeft = styled.section`
-  flex: ${({ isMobile }) => (isMobile ? 0 : 1)};
+  flex: ${({ $isMobile }) => ($isMobile ? 0 : 1)};
 `
 const StyleCenter = styled.section`
   display: flex;
   justify-content: center;
   flex: 1;
-  margin-left: ${({ isMobile }) => (isMobile ? "8vw" : "0")};
+  margin-left: ${({ $isMobile }) => ($isMobile ? "8vw" : "0")};
 `
 const StyleLogo = styled.img`
   display: block;
@@ -51,18 +51,18 @@ export default function Header() {
     const {isMobile, isTablet} = useContext(ResponsiveContext);
 
     return (
-        <StyleHeader isMobile={isMobile} isTablet={isTablet}>
-            <StyleLeft isMobile={isMobile}>
+        <StyleHeader $isMobile={isMobile} $isTablet={isTablet}>
+            <StyleLeft $isMobile={isMobile}>
                 {isMobile && (
                   <StyleLogo className="logo" src={mobileLogo} alt="로고" />
                 )}
             </StyleLeft>
-            <StyleCenter isMobile={isMobile}>
+            <StyleCenter $isMobile={isMobile}>
                 {!isMobile && (
                   <StyleLogo className="logo" src={logo} alt="로고" />
                 )}
             </StyleCenter>
-            <StyleRight isMobile={isMobile} className='login'>
+            <StyleRight $isMobile={isMobile} className='login'>
                 <StyleUserInfo>
                   <StyleProfile className="profile" src={profile} />
                   <p>홍길동님, 환영합니다!</p>

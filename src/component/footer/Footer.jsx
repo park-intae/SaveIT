@@ -8,16 +8,16 @@ const StyleFooter = styled.footer`
   width: 100%;
   border-top: 1px solid #e0e0e0;
   margin-top: 20px;
-  padding: ${({isMobile, isTablet})=>
-    isMobile ? "16px" : isTablet ? "24px" : "20px 48px"};
+  padding: ${({$isMobile, $isTablet})=>
+    $isMobile ? "16px" : $isTablet ? "24px" : "20px 48px"};
   display: flex;
-  justify-content: ${({isMobile, isTablet}) =>
-    isMobile || isTablet ? "center" : "space-between"};
-  align-items: ${({isMobile, isTablet}) =>
-    isMobile || isTablet ? "center" : "flex-start"};
+  justify-content: ${({$isMobile, $isTablet}) =>
+    $isMobile || $isTablet ? "center" : "space-between"};
+  align-items: ${({$isMobile, $isTablet}) =>
+    $isMobile || $isTablet ? "center" : "flex-start"};
   flex-wrap: wrap;
-  text-align: ${({isMobile, isTablet}) =>
-    isMobile || isTablet ? "center" : "left"};
+  text-align: ${({$isMobile, $isTablet}) =>
+    $isMobile || $isTablet ? "center" : "left"};
   font-size: 13px;
   line-height: 1.5;
 
@@ -26,7 +26,7 @@ const StyleFooter = styled.footer`
   }
 `
 const Info = styled.article`
-  display: ${({ isMobile, isTablet }) => (isMobile || isTablet ? "none" : "block")};
+  display: ${({ $isMobile, $isTablet }) => ($isMobile || $isTablet ? "none" : "block")};
   flex: 3;
 `;
 
@@ -34,8 +34,8 @@ export default function Footer() {
     const {isMobile, isTablet} = useContext(ResponsiveContext);
 
     return (
-        <StyleFooter isMobile={isMobile} isTablet={isTablet}>
-            <Info isMobile={isMobile} isTablet={isTablet}>
+        <StyleFooter $isMobile={isMobile} $isTablet={isTablet}>
+            <Info $isMobile={isMobile} $isTablet={isTablet}>
                 <p>(주)세이빗 | 대표 Thein 2Team<br />
                     사업자등록번호 123-45-67890 | 통신판매업 신고 2025-서울강남-1234<br />
                     서울특별시 강남구 테헤란로 123, 4층 (06123)</p>
