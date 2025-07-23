@@ -7,6 +7,24 @@ import { useEffect, useMemo, useState } from 'react';
 import { addDate, getDateString } from '../../../../utils/dateUtil';
 import TableCard from '../../../styleComponent/TableCard';
 import useAddItem from '../../../../hooks/useAddItem';
+import SlipDateButton from './SlipDateButton';
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  &.left {
+    left: 1.5%;
+  }
+  &.right {
+    right: 1.5%;
+  }
+`;
 
 console.log("weeklyRecords", weeklyRecords);
 
@@ -59,15 +77,15 @@ export default function Table() {
   return (
     <>
       <TableCard className="table">
-        <button className="slipDateButton" onClick={addPrevDate}>
-          &lt;
-        </button>
+        <ButtonWrapper className="left">
+          <SlipDateButton onClick={addPrevDate}>◀</SlipDateButton>
+        </ButtonWrapper>
         {date.map((dateStr) => {
           return <TableRecord key={dateStr} date={dateStr} entries={dateRecords[dateStr] || []} />;
         })}
-        <button className="slipDateButton" onClick={addNextDate}>
-          &gt;
-        </button>
+        <ButtonWrapper className="right">
+          <SlipDateButton onClick={addNextDate}>▶</SlipDateButton>
+        </ButtonWrapper>
       </TableCard>
     </>
   );

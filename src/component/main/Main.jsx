@@ -8,6 +8,7 @@ const StyleMain = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #212529;
 `
 
 export default function Main() {

@@ -6,8 +6,14 @@ const StyleTableRecord = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 120px;
-  max-width: 120px;
+  min-width: 100px;
+  max-width: 100px;
+  flex-shrink: 0;
+
+  h3{
+    font-size: 16px;
+    font-weight: 600;
+  }
 `;
 
 export default function TableRecord({ date, entries }) {

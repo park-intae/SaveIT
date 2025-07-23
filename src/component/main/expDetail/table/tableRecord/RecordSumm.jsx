@@ -13,27 +13,28 @@ const StyleSumm = styled.article`
         display: flex;
         width: 100%;
         margin: 4px 0;
-        font-size: 15.5px;
+        font-size: 14.5px;
+        font-weight: 700;
     }
 
     .label {
-        padding-left: 5px;
         flex: 0 0 auto;
     }
 
     .value {
-        padding-right: 5px;
-        color: black;
+        color: #212529;
         flex: 1 1 auto;
         text-align: right;
     }
 
     .exspand {
         color: #e74c3c; /* 빨강 */
+        gap: 7px;
     }
 
     .saving {
         color: #27ae60; /* 초록 */
+        gap: 7px;
     }
 `
 export default function RecordSumm({ entries }) {
