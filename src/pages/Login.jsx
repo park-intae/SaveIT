@@ -11,6 +11,7 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: #212529;
 `;
 const LoginLogo = styled.div`
   width: 100%;
@@ -34,18 +35,35 @@ const Quote = styled.div`
   justify-content: center;
   align-items: center;
   margin: 3rem 0;
+`
 
-  h1 {
-    font-size: 20px;
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 12px;
+const QuoteWrapper = styled.div`
+  height: 55px;
+  overflow: hidden;
+`;
+
+const QuoteTrack = styled.ul`
+  display: flex;
+  flex-direction: column;
+  
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
   }
   p {
-    font-size: 14px;
-    color: #999;
+    font-size: 22px;
   }
-`
+  span {
+    font-size: 13px;
+    color: #999;
+    margin-top: 14px;
+  }
+`;
+
 const LoginFooter = styled.footer`
   max-width: 1024px;
   width: 100%;
@@ -147,8 +165,14 @@ function Login() {
         />
       </LoginBtn>
       <Quote>
-        <h1>❝ 절약은 가장 확실한 수입이다. ❞</h1>
-        <p>─ 벤자민 프랭클린</p>
+        <QuoteWrapper>
+          <QuoteTrack>
+            <li><p>“ 절약은 가장 확실한 수입이다. ”</p><span>— 벤자민 프랭클린</span></li>
+            <li><p>“ 오늘의 지출이 내일의 자유를 만든다. ”</p><span>— 미상</span></li>
+            <li><p>“ 돈은 쓰는 것이 아니라 다루는 것이다. ”</p><span>— 워렌 버핏</span></li>
+            {/* 더 추가 가능 */}
+          </QuoteTrack>
+        </QuoteWrapper>
       </Quote>
       <LoginFooter isMobile={isMobile} isTablet={isTablet}>
           <FootLeft isMobile={isMobile} isTablet={isTablet}>
