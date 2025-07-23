@@ -6,8 +6,8 @@ import { ResponsiveContext } from '../../context/ResponsiveProvider';
 import { useContext } from 'react';
 
 const StyleHeader = styled.section`
+  width: 100%;
   max-width: 1024px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,8 +19,8 @@ const StyleLeft = styled.section`
 `
 const StyleCenter = styled.section`
   display: flex;
-  justify-content: flex-start;
-  flex: 0;
+  justify-content: center;
+  flex: 1;
   margin-left: ${({ isMobile }) => (isMobile ? "8vw" : "0")};
 `
 const StyleLogo = styled.img`
@@ -32,12 +32,19 @@ const StyleLogo = styled.img`
 const StyleRight = styled.div`
   display: flex;
   justify-content: flex-end;
-  flex: ${({ isMobile }) => (isMobile ? 0 : 1)};
+  flex: 1;
   cursor: pointer;
 `
 const StyleProfile = styled.img`
   display: block;
   height: clamp(18px, 4vw, 28px);
+`
+const StyleUserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  white-space: nowrap;
 `
 
 export default function Header() {
@@ -56,7 +63,10 @@ export default function Header() {
                 )}
             </StyleCenter>
             <StyleRight isMobile={isMobile} className='login'>
-                <StyleProfile className='profile' src={profile}></StyleProfile>
+                <StyleUserInfo>
+                  <StyleProfile className="profile" src={profile} />
+                  <p>홍길동님, 환영합니다!</p>
+                </StyleUserInfo>
                 {/* {isLogin === 'false' ? <button>구글 로그인</button>:<div><img className='profile'></img><p>{userName}</p></div>} */}
             </StyleRight>
         </StyleHeader>

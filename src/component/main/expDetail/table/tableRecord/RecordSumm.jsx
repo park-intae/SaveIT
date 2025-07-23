@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyleSumm = styled.article`
-    border-top: 1px solid #666666;
+    border-top: 1px solid #d9d9d9;
     margin: 8px 0;
     padding: 4px 0;
     width: 100%;
@@ -13,6 +13,7 @@ const StyleSumm = styled.article`
         display: flex;
         width: 100%;
         margin: 4px 0;
+        font-size: 15.5px;
     }
 
     .label {
@@ -49,8 +50,8 @@ export default function RecordSumm({ entries }) {
     return (
         <StyleSumm className="summary">
             {/* <h3>{date}</h3> */}
-            <p className="exspand"><span className="label">소비</span> <span className="value">₩{totalConsumption.toLocaleString()}</span></p>
-            <p className="saving"><span className="label">저축</span> <span className="value">₩{totalSaving.toLocaleString()}</span></p>
+            <p className="exspand"><span className="label">소비</span> <span className="value">₩ {totalConsumption.toLocaleString()}</span></p>
+            <p className="saving"><span className="label">저축</span> <span className="value">₩ {totalSaving.toLocaleString()}</span></p>
         </StyleSumm>
     )
 }

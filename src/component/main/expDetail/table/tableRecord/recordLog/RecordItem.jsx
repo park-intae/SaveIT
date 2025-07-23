@@ -5,7 +5,7 @@ const StyleRecordItem = styled.div`
 display: flex;
 overflow: hidden;
 font-size: 13px;
-padding: 8px;
+padding: 8px 4px;
 background-color: white;
 border: 1px solid;
 border-radius: 8px;
@@ -115,7 +115,7 @@ export default function RecordItem({ kind, category, amount }) {
       </div>
       <div className={`Ivalue ${isValueOverflow ? 'overflowed' : ''}`}>
         <span ref={valueRef}>
-          ₩{amount.toLocaleString()}
+          ₩ {amount.toLocaleString()}
         </span>
       </div>
     </StyleRecordItem>

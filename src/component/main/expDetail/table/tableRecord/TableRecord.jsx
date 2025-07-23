@@ -6,8 +6,12 @@ const StyleTableRecord = styled.article`
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 130px;
-    max-width: 130px;
+    min-width: 116px;
+    max-width: 116px;
+
+    h3{
+        font-size: 16px;
+    }
 `
 
 

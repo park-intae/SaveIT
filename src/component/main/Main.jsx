@@ -8,7 +8,6 @@ const StyleMain = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 38px;
 `
 
 export default function Main() {

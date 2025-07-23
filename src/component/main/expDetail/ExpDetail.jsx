@@ -5,6 +5,7 @@ const StyleExpDetail = styled.section`
   width: 100%;
   max-width: 1024px;
   overflow-x: auto;
+  padding: 22px 48px;
 `
 
 export default function ExpDetail() {

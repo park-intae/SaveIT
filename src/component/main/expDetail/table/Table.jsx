@@ -8,7 +8,8 @@ import { useEffect } from "react";
 const TableCard = styled(StyleCard)`
     display: flex;
     justify-content: space-around;
-    gap: 10px;
+    gap: 8px;
+    cursor: default;
     
     li{
      list-style-type: none;
