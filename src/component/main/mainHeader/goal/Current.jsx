@@ -62,9 +62,9 @@ export default function Current() {
   useEffect(()=> {
     getUserGoal()
     .then((res)=> {setUser(res)
-      console.log(res)
-                   setInputGoal(res.goalAmount)
-                  })
+      // console.log(res)
+          setInputGoal(res.goalAmount)
+      })
     .catch((err) => console.error("데이터 불러오기 실패", err))
   }, [])
 
