@@ -109,7 +109,7 @@ function Login() {
       );
 
       const jwt = res.data.jwt;
-      localStorage.setItem("jwt", jwt);
+      // localStorage.setItem("jwt", jwt);
       setToken(jwt);
       alert("로그인 성공!");
 
