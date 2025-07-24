@@ -5,6 +5,7 @@ import useHandleClickOutside from '../../../../../../../hooks/useHandleClickOuts
 
 const StyleRecordItem = styled.div`
   display: flex;
+  flex-direction: ${({ onDetailMode }) => (onDetailMode ? 'column' : 'row')};
   overflow: hidden;
   font-size: 13px;
   padding: 8px;
@@ -74,7 +75,9 @@ export default function RecordItem({ kind, category, amount
   function closeDetail() {
     setOnDetailMode(false)
   }
-  useHandleClickOutside(detailRef, closeDetail);
+  useHandleClickOutside(detailRef, () => {
+    if (onDetailMode) closeDetail();  // 밖을 클릭했을 때만 끄기
+  }, onDetailMode);
 
   // marquee 애니메이션 관리를 위한 길이 판단
   const [isLabelOverflow, setIsLabelOverflow] = useState(false);
@@ -110,11 +113,13 @@ export default function RecordItem({ kind, category, amount
     <StyleRecordItem
       className="RecordItem"
       kind={kind}
+      onDetailMode={onDetailMode}
       style={{
         '--labelSlide': `${labelSlide}px`,
         '--valueSlide': `${valueSlide}px`,
       }}
       onClick={() => setOnDetailMode(true)}
+      ref={detailRef}
     >
       {!onDetailMode ? (
         <>
@@ -125,12 +130,11 @@ export default function RecordItem({ kind, category, amount
             {typeof amount === 'number' ? `₩${amount.toLocaleString()}` : '데이터 없음'}
           </div>
         </>
-      ) : 
-      <ItemLog 
-        category={category}
-        amount={amount}
-        ref={detailRef}
-      />
+      ) :
+        <ItemLog
+          category={category}
+          amount={amount}
+        />
       }
     </StyleRecordItem>
   );
