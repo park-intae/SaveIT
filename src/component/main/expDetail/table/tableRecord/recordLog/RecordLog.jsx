@@ -4,6 +4,7 @@ import RecordItem from './RecordItem';
 
 import { useEffect, useRef, useState } from 'react';
 import add from '../../../../../../assets/add.svg';
+import InputItem from './InputItem';
 
 const StyleLog = styled.article`
   display: flex;
