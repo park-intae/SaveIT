@@ -128,6 +128,7 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef }, re
   const [isClosing, setIsClosing] = useState(false);
   const localRef = useRef(null);
 
+
   useImperativeHandle(ref, () => ({
     reqClose(){
       setIsClosing(true);
@@ -143,6 +144,9 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef }, re
   useEffect(() => {
     if (exposeDomRef && localRef.current) {
       exposeDomRef(localRef.current);
+
+  console.log(localRef)
+
     }
   }, [exposeDomRef]);
 

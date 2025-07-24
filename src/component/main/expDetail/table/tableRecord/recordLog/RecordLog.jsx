@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import RecordItem from './RecordItem';
-import InputItem from './InputItem/InputItem';
+
 import { useEffect, useRef, useState } from 'react';
 import add from '../../../../../../assets/add.svg';
 
