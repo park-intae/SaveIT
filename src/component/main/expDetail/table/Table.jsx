@@ -12,18 +12,7 @@ import SlipDateButton from './SlipDateButton';
 const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-
-  &.left {
-    left: 1.5%;
-  }
-  &.right {
-    right: 1.5%;
-  }
+  z-index: 10;
 `;
 
 console.log("weeklyRecords", weeklyRecords);
@@ -77,15 +66,11 @@ export default function Table() {
   return (
     <>
       <TableCard className="table">
-        <ButtonWrapper className="left">
-          <SlipDateButton onClick={addPrevDate}>◀</SlipDateButton>
-        </ButtonWrapper>
+        <SlipDateButton onClick={addPrevDate} dir="left"></SlipDateButton>
         {date.map((dateStr) => {
           return <TableRecord key={dateStr} date={dateStr} entries={dateRecords[dateStr] || []} />;
         })}
-        <ButtonWrapper className="right">
-          <SlipDateButton onClick={addNextDate}>▶</SlipDateButton>
-        </ButtonWrapper>
+        <SlipDateButton onClick={addNextDate} dir="right"></SlipDateButton>
       </TableCard>
     </>
   );

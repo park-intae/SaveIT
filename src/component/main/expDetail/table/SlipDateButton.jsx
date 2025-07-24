@@ -1,25 +1,49 @@
 import styled from "styled-components";
 
 const SlipDateButton = styled.button`
-    background: transparent;
-    border: 1px solid #ced4da;
-    color: #666;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
+  color: #555;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  padding: 15px;
+  transition: box-shadow 0.3s ease;
+  
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 10px;
+        background-color: currentColor;
+    }
 
     &:hover {
-        background: rgba(0, 0, 0, 0.05);
-        border-color: #adb5bd;
-        color: #212529;
-        transform: translateY(-1px);
+        box-shadow: 0 0 0 2px rgb(230, 230, 255);
     }
-`
+
+    ${({ dir }) =>
+    dir === 'left'
+        ? `
+        &::before {
+            top: calc(50% - 2px);
+            transform: rotate(45deg);
+        }
+        &::after {
+            top: calc(50% - -4px);
+            transform: rotate(-45deg);
+        }
+        `
+        : `
+        &::before {
+            top: calc(50% - 3px);
+            transform: rotate(-45deg);
+        }
+        &::after {
+            top: calc(50% - -4px);
+            transform: rotate(45deg);
+        }
+        `
+    }
+`;
 
 export default SlipDateButton;

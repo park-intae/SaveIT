@@ -7,7 +7,6 @@ const StyleFooter = styled.footer`
   max-width: 1024px;
   width: 100%;
   border-top: 1px solid #e0e0e0;
-  margin-top: 20px;
   padding: ${({$isMobile, $isTablet})=>
     $isMobile ? "16px" : $isTablet ? "24px" : "20px 48px"};
   display: flex;

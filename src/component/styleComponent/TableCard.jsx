@@ -10,7 +10,6 @@ const StyledTableCard = styled(StyleCard)`
   min-width: 100%;
   flex-wrap: nowrap;
   overflow: visible;
-  padding-inline: 60px;
   white-space: nowrap;
   scroll-behavior: smooth;
   cursor: default;

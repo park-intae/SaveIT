@@ -106,8 +106,8 @@ export default function InputItem() {
             <h3>입력창</h3>
             <article>
                 <fieldset>
-                    <input type="radio" id="spend" name="kind" value="지출" />
-                    <label htmlFor="spend">지출</label>
+                    <input type="radio" id="spend" name="kind" value="소비" />
+                    <label htmlFor="spend">소비</label>
 
                     <input type="radio" id="save" name="kind" value="저축" /><label htmlFor="save">저축</label>
                 </fieldset>
