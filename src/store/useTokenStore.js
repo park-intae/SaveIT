@@ -1,13 +1,16 @@
 import { create } from "zustand"
 
+
 const useTokenStore = create((set) => ({
-    token: null,
-    setToken: (token) => {
+  token: localStorage.getItem("jwt") || null,
+  setToken: (token) => {
+    localStorage.setItem("jwt", token);
     set({ token });
-    },
-    clearToken: () => {
+  },
+  clearToken: () => {
+    localStorage.removeItem("jwt");
     set({ token: null });
-    }
-}))
+  },
+}));
 
 export default useTokenStore
