@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-import RecordItem from './RecordItem';
-
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import add from '../../../../../../assets/add.svg';
+import RecordItem from './recordItem/RecordItem';
+import InputItem from './InputItem';
+import useHandleClickOutsdie from '../../../../../../hooks/useHandleClickOutside';
 
 const StyleLog = styled.article`
   display: flex;
@@ -62,24 +63,32 @@ export default function RecordLog({ entries = [] }) {
   };
 
   // 입력창 외부 클릭 감지 후 동작
-  useEffect(() => {
-    function handleClickOut(e) {
-      if (domRef.current && !domRef.current.contains(e.target)) {
-        // 애니메이션 닫기 요청 메서드 호출
-        if (inputComponentRef.current?.reqClose) {
-          inputComponentRef.current.reqClose();
-        }
-      }
-    }
 
-    if (showInput) {
-      document.addEventListener('mousedown', handleClickOut);
+    function handler(){
+    if(inputComponentRef.current?.reqClose){
+      inputComponentRef.current.reqClose();
     }
+  }
+  useHandleClickOutsdie(domRef,handler,showInput);
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOut);
-    }
-  }, [showInput])
+  // useEffect(() => {
+  //   function handleClickOut(e) {
+  //     if (domRef.current && !domRef.current.contains(e.target)) {
+  //       // 애니메이션 닫기 요청 메서드 호출
+  //       if (inputComponentRef.current?.reqClose) {
+  //         inputComponentRef.current.reqClose();
+  //       }
+  //     }
+  //   }
+
+  //   if (showInput) {
+  //     document.addEventListener('mousedown', handleClickOut);
+  //   }
+
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOut);
+  //   }
+  // }, [showInput])
 
   return (
     <StyleLog className="log">
