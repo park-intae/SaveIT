@@ -104,9 +104,8 @@ export default function RecordItem({ kind, category, amount }) {
       </div>
       <div className={`Ivalue ${isValueOverflow ? 'overflowed' : ''}`}>
         <span ref={valueRef}>
-          ₩ {amount.toLocaleString()}
+          {typeof amount === 'number' ? `₩ ${amount.toLocaleString()}` : '데이터 없음'}
         </span>
-        {typeof amount === 'number' ? `₩${amount.toLocaleString()}` : '데이터 없음'}
       </div>
     </StyleRecordItem>
   );
