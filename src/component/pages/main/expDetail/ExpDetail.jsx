@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import Table from "./table/Table";
+import styled from "styled-components"
+import Table from "./table/Table"
 
 const StyleExpDetail = styled.section`
   width: 100%;

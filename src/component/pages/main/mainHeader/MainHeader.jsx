@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Expend from "./expend/Expend";
 import Goal from "./goal/Goal";
-import { ResponsiveContext } from '../../../context/ResponsiveProvider';
 import { useContext } from 'react';
+import { ResponsiveContext } from "@context/ResponsiveContext";
 
 const StyleMainHeader = styled.section`
   display: flex;

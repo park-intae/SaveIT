@@ -1,9 +1,10 @@
-import styled from 'styled-components';
-import logo from '../../assets/logo.svg';
-import mobileLogo from '../../assets/mobile_logo.svg';
-import profile from '../../assets/profile.svg';
-import { ResponsiveContext } from '../../context/ResponsiveProvider';
-import { useContext } from 'react';
+import { ResponsiveContext } from "@context/ResponsiveContext"
+import { useContext } from "react"
+import styled from "styled-components"
+import mobileLogo from '@assets/mobile_logo.svg'
+import logo from '@assets/logo.svg'
+import profile from '@assets/profile.svg'
+
 
 const StyleHeader = styled.section`
   max-width: 1024px;

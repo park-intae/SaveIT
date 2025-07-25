@@ -1,9 +1,9 @@
-import TableRecord from './tableRecord/TableRecord';
-import useWeeklyStore from '../../../../store/useWeeklyStore'; // weekRecord 데이터 가져옴
-import { useEffect, useMemo, useState } from 'react';
-import { addDate, getDateString } from '../../../../utils/dateUtil';
-import TableCard from '../../../styleComponent/TableCard';
-import useAddItem from '../../../../hooks/useAddItem';
+import { addDate, getDateString } from "@utils/dateUtil";
+import { useEffect, useMemo, useState } from "react";
+import TableCard from "@component/styleComponent/TableCard";
+import useAddItem from "@hooks/useAddItem";
+import useWeeklyStore from "@stores/useWeeklyStore";
+import TableRecord from "./tableRecord/TableRecord";
 
 export default function Table() {
   const { weeklyRecords, fetchWeeklyRecords, isLoading, error } = useWeeklyStore();

@@ -1,10 +1,9 @@
-import styled from 'styled-components';
-
-import { useRef, useState } from 'react';
-import add from '../../../../../../assets/add.svg';
-import RecordItem from './recordItem/RecordItem';
-import InputItem from './InputItem';
-import useHandleClickOutsdie from '../../../../../../hooks/useHandleClickOutside';
+import { useRef, useState } from "react";
+import styled from "styled-components";
+import add from "@assets/add.svg"
+import useHandleClickOutside from "@hooks/useHandleClickOutside";
+import RecordItem from "./RecordItem";
+import InputItem from "./InputItem";
 
 const StyleLog = styled.article`
   display: flex;
@@ -69,7 +68,7 @@ export default function RecordLog({ entries = [] }) {
       inputComponentRef.current.reqClose();
     }
   }
-  useHandleClickOutsdie(domRef,handler,showInput);
+  useHandleClickOutside(domRef,handler,showInput);
 
   // useEffect(() => {
   //   function handleClickOut(e) {

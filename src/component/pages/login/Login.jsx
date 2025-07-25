@@ -1,11 +1,12 @@
-import styled from 'styled-components';
-import axios from 'axios';
-import { GoogleLogin } from '@react-oauth/google';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import logo from '../assets/login_logo.svg';
-import { CallQuote } from '../utils/callQuote';
 // import { translateText } from '../utils/translateText'; 번역기능 import
+
+import { GoogleLogin } from "@react-oauth/google";
+import { CallQuote } from "@utils/callQuote";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import logo from "@assets/login_logo.svg";
 
 const LoginWrapper = styled.div`
   min-height: 100vh;

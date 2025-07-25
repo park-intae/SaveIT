@@ -1,4 +1,4 @@
-import alter from '../../../../assets/pencil.svg'
+import alter from '@assets/pencil.svg'
 import styled from 'styled-components';
 
 const StyleCurrent = styled.div`

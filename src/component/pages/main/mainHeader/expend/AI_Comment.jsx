@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import { ResponsiveContext } from '../../../../context/ResponsiveProvider';
 import { useContext, useEffect, useState } from 'react';
 import axios from "axios";
+import { ResponsiveContext } from "@context/ResponsiveContext";
 
 const StyleComment = styled.article`
   flex: 2;

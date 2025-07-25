@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import ExpDetail from "./expDetail/ExpDetail";
-import MainHeader from "./mainHeader/MainHeader";
-import Header from '../header/Header'
-import Footer from '../footer/Footer'
+import styled from "styled-components"
+import Header from "./header/Header"
+import MainHeader from "./mainHeader/MainHeader"
+import ExpDetail from "./expDetail/ExpDetail"
+import Footer from "./footer/Footer"
 
 const StyleMain = styled.section`
   display: flex;
@@ -17,7 +17,7 @@ export default function Main() {
             <Header/>
             <MainHeader />
             <ExpDetail />
-            <Footer/>
+            <Footer />
         </StyleMain>
     )
 }

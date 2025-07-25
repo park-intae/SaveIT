@@ -1,7 +1,7 @@
-import styled from "styled-components"
-import Right from "./Right"
-import { ResponsiveContext } from '../../context/ResponsiveProvider';
-import { useContext } from 'react';
+import { ResponsiveContext } from "@context/ResponsiveContext";
+import { useContext } from "react";
+import styled from "styled-components";
+import Right from "./Right";
 
 const StyleFooter = styled.footer`
   max-width: 1024px;

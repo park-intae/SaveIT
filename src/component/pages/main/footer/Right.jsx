@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import { ResponsiveContext } from '../../context/ResponsiveProvider';
-import { useContext } from 'react';
+import { ResponsiveContext } from "@context/ResponsiveContext";
+import { useContext } from "react";
+import styled from "styled-components";
 
 const StyleRight = styled.article`
   font-size: ${({isMobile})=>(isMobile ? "9px" : "13px")};

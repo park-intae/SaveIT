@@ -1,7 +1,7 @@
-import styled, { keyframes } from "styled-components"
-import close from '../../../../../../assets/close.svg';
-import add from '../../../../../../assets/add.svg';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import styled, { keyframes } from "styled-components";
+import close from "@assets/close.svg";
+import add from "@assets/add.svg";
 
 const SlideFadein = keyframes`
     from{

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import StyleCard from "../../../styleComponent/StyleCard";
-import Current from "./Current";
+import StyleCard from "@component/styleComponent/StyleCard";
 import Expension from "./Expension";
+import Current from "./Current";
 
 const GoalCard = styled(StyleCard)`
   flex: 0 1 35%;
