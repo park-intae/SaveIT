@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import ItemLog from './Itemlog';
+import useHandleClickOutside from '@hooks/useHandleClickOutside';
 
 const StyleRecordItem = styled.div`
   display: flex;
+  flex-direction: ${({ onDetailMode }) => (onDetailMode ? 'column' : 'row')};
   overflow: hidden;
   font-size: 13px;
   padding: 8px;
@@ -61,14 +64,30 @@ const StyleRecordItem = styled.div`
   }
 `;
 
-export default function RecordItem({ kind, category, amount }) {
-  // 인터렉션 애니메이션 관리를 위한 길이 판단
+// memo 주석 효과 지워야됨
+export default function RecordItem({ kind, category, amount
+  //, memo
+}) {
+  //상세보기 길이판단
+  const [onDetailMode, setOnDetailMode] = useState(false);
+
+  const detailRef = useRef(null);
+
+  function closeDetail() {
+    setOnDetailMode(false)
+  }
+  useHandleClickOutside(detailRef, () => {
+    if (onDetailMode) closeDetail();  // 밖을 클릭했을 때만 끄기
+  }, onDetailMode);
+
+  // marquee 애니메이션 관리를 위한 길이 판단
   const [isLabelOverflow, setIsLabelOverflow] = useState(false);
   const [isValueOverflow, setIsValueOverflow] = useState(false);
-  
+
   const [labelSlide, setLabelSlide] = useState(0);
   const [valueSlide, setValueSlide] = useState(0);
-  
+
+
   const labelRef = useRef(null);
   const valueRef = useRef(null);
 
@@ -90,21 +109,34 @@ export default function RecordItem({ kind, category, amount }) {
     return () => cancelAnimationFrame(id);
   }, [category, amount]);
 
+
   return (
     <StyleRecordItem
       className="RecordItem"
       kind={kind}
+      onDetailMode={onDetailMode}
       style={{
         '--labelSlide': `${labelSlide}px`,
         '--valueSlide': `${valueSlide}px`,
       }}
+      onClick={() => setOnDetailMode(true)}
+      ref={detailRef}
     >
-      <div className={`Ilabel ${isLabelOverflow ? 'overflowed' : ''}`}>
-        <span ref={labelRef}>{category}</span>
-      </div>
-      <div className={`Ivalue ${isValueOverflow ? 'overflowed' : ''}`}>
-        {typeof amount === 'number' ? `₩${amount.toLocaleString()}` : '데이터 없음'}
-      </div>
+      {!onDetailMode ? (
+        <>
+          <div className={`Ilabel ${isLabelOverflow ? 'overflowed' : ''}`}>
+            <span ref={labelRef}>{category}</span>
+          </div>
+          <div className={`Ivalue ${isValueOverflow ? 'overflowed' : ''}`}>
+            {typeof amount === 'number' ? `₩${amount.toLocaleString()}` : '데이터 없음'}
+          </div>
+        </>
+      ) :
+        <ItemLog
+          category={category}
+          amount={amount}
+        />
+      }
     </StyleRecordItem>
   );
 }

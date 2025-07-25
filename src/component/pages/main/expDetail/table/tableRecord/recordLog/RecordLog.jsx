@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import add from "@assets/add.svg"
 import useHandleClickOutside from "@hooks/useHandleClickOutside";
-import RecordItem from "./RecordItem";
 import InputItem from "./InputItem";
+import RecordItem from "./recordItem/RecordItem";
 
 const StyleLog = styled.article`
   display: flex;
