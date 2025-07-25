@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import RecordLog from './recordLog/RecordLog';
-import RecordSumm from './RecordSumm';
+import RecordSumm from './recordSumm/RecordSumm';
 
 const StyleTableRecord = styled.article`
   display: flex;
