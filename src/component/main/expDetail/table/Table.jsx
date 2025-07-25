@@ -13,13 +13,13 @@ export default function Table() {
   // 처음 랜더링될 때 기준 상태
   const [date, setDate] = useState(() => {
     const arr = [];
-    for (let i = -3; i <= 3; i++) {
+    for (let i = -2; i <= 2; i++) {
       arr.push(getDateString(addDate(today, i)));
     }
     return arr;
   });
 
-  const { addPrevDate, addNextDate } = useAddItem(date, setDate, 7); // 날짜 추가/제거 상태 관리
+  const { addPrevDate, addNextDate } = useAddItem(date, setDate, 5); // 날짜 추가/제거 상태 관리
 
   // 캘린더 비동기화
   useEffect(() => {
