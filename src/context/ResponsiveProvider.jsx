@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-
-export const ResponsiveContext = createContext();
+import { useEffect, useState } from "react";
+import { ResponsiveContext } from "./ResponsiveContext";
 
 export function ResponsiveProvider({ children }){
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
