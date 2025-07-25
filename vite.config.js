@@ -21,6 +21,9 @@ export default defineConfig({
       '@stores': path.resolve(__dirname, './src/stores'),
     },
   },
+  optimizeDeps: {
+    include: ['apexcharts'],
+  },
   server: {
     proxy: {
       '/api': {
