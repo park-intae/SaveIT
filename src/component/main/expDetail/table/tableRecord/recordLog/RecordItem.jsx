@@ -23,14 +23,6 @@ const StyleRecordItem = styled.div`
     transform: translateY(-1px) translateZ(0);
   }
 
-  // &:hover .Ilabel.overflowed span {
-  //   transform: translateX(-100%);
-  // }
-
-  // &:hover .Ivalue.overflowed span {
-  //   transform: translateX(calc(-100%));
-  // }
-
   /* .Ilabel과 .Ivalue에 공통 적용되는 스타일 */
   .Ilabel,
   .Ivalue {
@@ -71,14 +63,14 @@ const StyleRecordItem = styled.div`
 
 export default function RecordItem({ kind, category, amount }) {
   // 인터렉션 애니메이션 관리를 위한 길이 판단
-  const labelRef = useRef(null);
-  const valueRef = useRef(null);
-
   const [isLabelOverflow, setIsLabelOverflow] = useState(false);
   const [isValueOverflow, setIsValueOverflow] = useState(false);
-
+  
   const [labelSlide, setLabelSlide] = useState(0);
   const [valueSlide, setValueSlide] = useState(0);
+  
+  const labelRef = useRef(null);
+  const valueRef = useRef(null);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
