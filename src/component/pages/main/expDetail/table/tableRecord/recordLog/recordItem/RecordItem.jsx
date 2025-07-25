@@ -122,16 +122,6 @@ export default function RecordItem({ kind, category, amount
       onClick={() => setOnDetailMode(true)}
       ref={detailRef}
     >
-<<<<<<< HEAD:src/component/main/expDetail/table/tableRecord/recordLog/RecordItem.jsx
-      <div className={`Ilabel ${isLabelOverflow ? 'overflowed' : ''}`}>
-        <span ref={labelRef}>{category}</span>
-      </div>
-      <div className={`Ivalue ${isValueOverflow ? 'overflowed' : ''}`}>
-        <span ref={valueRef}>
-          {typeof amount === 'number' ? `₩ ${amount.toLocaleString()}` : '데이터 없음'}
-        </span>
-      </div>
-=======
       {!onDetailMode ? (
         <>
           <div className={`Ilabel ${isLabelOverflow ? 'overflowed' : ''}`}>
@@ -147,7 +137,6 @@ export default function RecordItem({ kind, category, amount
           amount={amount}
         />
       }
->>>>>>> aadb64b236e8586cf2ca0017dee0550dd9d03b88:src/component/pages/main/expDetail/table/tableRecord/recordLog/recordItem/RecordItem.jsx
     </StyleRecordItem>
   );
 }

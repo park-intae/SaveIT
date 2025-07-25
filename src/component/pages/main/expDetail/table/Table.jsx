@@ -1,30 +1,10 @@
-<<<<<<< HEAD:src/component/main/expDetail/table/Table.jsx
-import styled from "styled-components";
-import weeklyRecords from "../../../../data/WeeklyRecords"; //나중에 서버에서 데이터 가져오면 이거 지우셈
-import TableRecord from './tableRecord/TableRecord';
-import StyleCard from "../../../styleComponent/StyleCard";
-import useWeeklyStore from '../../../../store/useWeeklyStore';
-import { useEffect, useMemo, useState } from 'react';
-import { addDate, getDateString } from '../../../../utils/dateUtil';
-import TableCard from '../../../styleComponent/TableCard';
-import useAddItem from '../../../../hooks/useAddItem';
-import SlipDateButton from './SlipDateButton';
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  z-index: 10;
-`;
-
-console.log("weeklyRecords", weeklyRecords);
-=======
 import { addDate, getDateString } from "@utils/dateUtil";
 import { useEffect, useMemo, useState } from "react";
 import TableCard from "@component/styleComponent/TableCard";
 import useAddItem from "@hooks/useAddItem";
 import useWeeklyStore from "@stores/useWeeklyStore";
 import TableRecord from "./tableRecord/TableRecord";
->>>>>>> aadb64b236e8586cf2ca0017dee0550dd9d03b88:src/component/pages/main/expDetail/table/Table.jsx
+import SlipDateButton from "../../../../styleComponent/SlipDateButton";
 
 export default function Table() {
   const { weeklyRecords, fetchWeeklyRecords, isLoading, error } = useWeeklyStore();
