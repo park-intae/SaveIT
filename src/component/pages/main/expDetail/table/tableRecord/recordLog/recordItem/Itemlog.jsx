@@ -32,7 +32,7 @@ const StyleItemDetail = styled.div`
     }
     
     article input::placeholder{
-        font-color: #777777;
+        color: #777777;
     }
     
     article input:focus{
@@ -75,13 +75,13 @@ const StyleToggleBtn = styled.label`
     }
 `
 
-export default function ItemLog({ category, amount
+export default function ItemLog({ setOnDetailMod, category, amount
     // , memo
 }) {
     const [isModify, setIsModify] = useState(false);
 
     return (
-        <StyleItemDetail $isModify={isModify}>
+        <StyleItemDetail>
             <StyleToggleBtn className="toggleBtn">
                 <span>수정</span>
                 <input role="switch" type="checkbox" checked={isModify} onChange={() => setIsModify(!isModify)} />
@@ -97,13 +97,13 @@ export default function ItemLog({ category, amount
                     <article>
                         <input placeholder={category} />
                         <input placeholder={amount} />
-                        {/* <input type="textarea" placeholder={memo}/> */}
+                        {/* <textarea placeholder={memo}/> */}
                     </article>
                 )
             }
             <ButtonGroup>
-                {isModify && <button><img src={edit}/></button>}
-                <button className="close">
+                {isModify && <button onClick={() => setOnDetailMod('closing')} ><img src={edit}/></button>}
+                <button onClick={()=>setOnDetailMod('closing')} className="close">
                     <img src={close} />
                 </button>
             </ButtonGroup>

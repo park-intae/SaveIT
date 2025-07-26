@@ -40,6 +40,7 @@ const StyleRecordItem = styled.div`
     display: inline-block;
     min-width: 0;
     max-width: 100%;
+    will-change: transform;
     transition: transform 1s ease-out;
   }
 
@@ -149,6 +150,7 @@ export default function RecordItem({ kind, category, amount
         </>
       ) :
         <ItemLog
+          setOnDetailMod={() => setOnDetailMode('closing')}
           category={category}
           amount={amount}
         />
