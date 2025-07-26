@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "re
 import styled, { keyframes } from "styled-components";
 import close from "@assets/close.svg";
 import add from "@assets/add.svg";
+import ButtonGroup from "@component/styleComponent/ButtonGroup";
 
 const SlideFadein = keyframes`
     from{
@@ -121,6 +122,7 @@ const StyledInputForm = styled.form`
         margin: auto;      
       }
     }
+
   }
 `;
 
@@ -183,14 +185,14 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef }, re
           placeholder="메모를 작성해주세요"
         />
       </article>
-      <div className="button-group">
-        <button type="button" className="toolkit" onClick={handleCloseClick}>
+      <ButtonGroup>
+        <button type="button" onClick={handleCloseClick}>
           <img src={close}></img>
         </button>
-        <button type="button" className="toolkit" onClick={handleCloseClick}>
+        <button type="button" onClick={handleCloseClick}>
           <img src={add}></img>
         </button>
-      </div>
+      </ButtonGroup>
     </StyledInputForm>
   )
 });
