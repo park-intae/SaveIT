@@ -9,12 +9,12 @@ const StyleTableRecord = styled.article`
   min-width: 120px;
   max-width: 120px;
 `;
-export default function TableRecord({ date, entries }) {
+export default function TableRecord({ date, expense, save }) {
   return (
     <StyleTableRecord className="tableRecord">
       <h3>{date}</h3>
-      <RecordSumm entries={entries} />
-      <RecordLog entries={entries} />
+      <RecordSumm expense={expense} save={save} />
+      <RecordLog expense={expense} save={save} />
     </StyleTableRecord>
   );
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import RecordItem from './RecordItem';
-import InputItem from './InputItem/InputItem';
+import InputItem from './InputItem';
 import { useState } from 'react';
 
 const StyleLog = styled.article`
@@ -40,18 +40,28 @@ const StyleLog = styled.article`
   }
 `;
 
-export default function RecordLog({ entries = [] }) {
+export default function RecordLog({expense, save}) {
   const [showInput, setShowInput] = useState(false);
 
   const toggleInput = () => setShowInput((prev) => !prev);
 
   return (
     <StyleLog className="log">
-      {entries.length > 0 && (
+      {expense.length > 0 && (
         <ul>
-          {entries.map((item, i) => (
+          {expense.map((item, i) => (
             <li key={i}>
-              <RecordItem {...item} />
+              <RecordItem item={item} />
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {save.length > 0 && (
+        <ul>
+          {save.map((item, i) => (
+            <li key={i}>
+              <RecordItem item={item} />
             </li>
           ))}
         </ul>

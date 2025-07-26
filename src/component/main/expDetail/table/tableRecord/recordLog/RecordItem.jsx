@@ -14,7 +14,7 @@ const StyleRecordItem = styled.div`
   width: 95%;
 
   /* 'kind' 값에 따라 테두리 색상 동적 변경 */
-  border-color: ${({ kind }) => (kind === '소비' ? '#e74c3c' : kind === '저축' ? '#27ae60' : '#333')};
+  border-color: ${({ kind }) => (kind === 1 ? '#e74c3c' : kind === 0 ? '#27ae60' : '#333')};
 
   &:hover {
     box-shadow: 0 4px 10px rgba(50, 50, 50, 0.1);
@@ -69,7 +69,7 @@ const StyleRecordItem = styled.div`
   }
 `;
 
-export default function RecordItem({ kind, category, amount }) {
+export default function RecordItem({ item }) {
   // 인터렉션 애니메이션 관리를 위한 길이 판단
   const labelRef = useRef(null);
   const valueRef = useRef(null);
@@ -96,22 +96,22 @@ export default function RecordItem({ kind, category, amount }) {
       }
     });
     return () => cancelAnimationFrame(id);
-  }, [category, amount]);
+  }, []);
 
   return (
     <StyleRecordItem
       className="RecordItem"
-      kind={kind}
+      kind={item.kind}
       style={{
         '--labelSlide': `${labelSlide}px`,
         '--valueSlide': `${valueSlide}px`,
       }}
     >
       <div className={`Ilabel ${isLabelOverflow ? 'overflowed' : ''}`}>
-        <span ref={labelRef}>{category}</span>
+        <span ref={labelRef}>{item.category}</span>
       </div>
       <div className={`Ivalue ${isValueOverflow ? 'overflowed' : ''}`}>
-        {typeof amount === 'number' ? `₩${amount.toLocaleString()}` : '데이터 없음'}
+        {typeof item.amount === 'number' ? `₩${item.amount}` : '데이터 없음'}
       </div>
     </StyleRecordItem>
   );

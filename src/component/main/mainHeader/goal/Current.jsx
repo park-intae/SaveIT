@@ -68,7 +68,6 @@ export default function Current() {
     .catch((err) => console.error("데이터 불러오기 실패", err))
   }, [])
 
-
   // console.log(goals)
  
   useEffect(()=> {
@@ -114,7 +113,8 @@ export default function Current() {
   }
 
   return (
-    <div className="current">
+    <StyleCurrent>
+      <div className="current">
       <p>목표달성 현황</p>
 
       <div className="goalSummary">
@@ -147,5 +147,7 @@ export default function Current() {
 
       <div className="progressBar"></div>
     </div>
+    </StyleCurrent>
+    
   );
 }
