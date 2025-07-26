@@ -16,6 +16,9 @@ const StyleItemDetail = styled.div`
     display: flex;
     flex-direction: column;
 
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+
     article {
         display: flex;
         flex-direction: column;
@@ -78,7 +81,7 @@ export default function ItemLog({ category, amount
     const [isModify, setIsModify] = useState(false);
 
     return (
-        <StyleItemDetail>
+        <StyleItemDetail $isModify={isModify}>
             <StyleToggleBtn className="toggleBtn">
                 <span>수정</span>
                 <input role="switch" type="checkbox" checked={isModify} onChange={() => setIsModify(!isModify)} />

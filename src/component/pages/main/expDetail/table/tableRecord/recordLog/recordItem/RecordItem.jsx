@@ -5,7 +5,7 @@ import useHandleClickOutside from '@hooks/useHandleClickOutside';
 
 const StyleRecordItem = styled.div`
   display: flex;
-  flex-direction: ${({ onDetailMode }) => (onDetailMode ? 'column' : 'row')};
+  flex-direction: ${({ $onDetailMode }) => ($onDetailMode === 'open' || $onDetailMode === 'closing' ? 'column' : 'row')};
   overflow: hidden;
   font-size: 13px;
   padding: 8px;
@@ -13,9 +13,11 @@ const StyleRecordItem = styled.div`
   border: 1px solid;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
   width: 95%;
-
+  
+  max-height: ${({ $onDetailMode }) => ($onDetailMode === 'open' ? '400px' : '40px')};
+  transition: max-height 0.5s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  
   /* 'kind' 값에 따라 테두리 색상 동적 변경 */
   border-color: ${({ kind }) => (kind === '소비' ? '#e74c3c' : kind === '저축' ? '#27ae60' : '#333')};
 
@@ -69,16 +71,30 @@ export default function RecordItem({ kind, category, amount
   //, memo
 }) {
   //상세보기 길이판단
-  const [onDetailMode, setOnDetailMode] = useState(false);
+  const [onDetailMode, setOnDetailMode] = useState('closed');
 
   const detailRef = useRef(null);
 
-  function closeDetail() {
-    setOnDetailMode(false)
+  function openDetail() {
+    setOnDetailMode('open');
   }
+
+  function closeDetail() {
+    setOnDetailMode('closing');
+  }
+
   useHandleClickOutside(detailRef, () => {
-    if (onDetailMode) closeDetail();  // 밖을 클릭했을 때만 끄기
-  }, onDetailMode);
+    if (onDetailMode === 'open') closeDetail();  // 밖을 클릭했을 때만 끄기
+  }, onDetailMode === 'open');
+
+   useEffect(() => {
+    if (onDetailMode === 'closing') {
+      const timer = setTimeout(() => {
+        setOnDetailMode('closed');
+      }, 500); // transition-duration과 동일하게 맞춤
+      return () => clearTimeout(timer);
+    }
+  }, [onDetailMode]);
 
   // marquee 애니메이션 관리를 위한 길이 판단
   const [isLabelOverflow, setIsLabelOverflow] = useState(false);
@@ -86,6 +102,7 @@ export default function RecordItem({ kind, category, amount
 
   const [labelSlide, setLabelSlide] = useState(0);
   const [valueSlide, setValueSlide] = useState(0);
+
 
   const labelRef = useRef(null);
   const valueRef = useRef(null);
@@ -113,15 +130,15 @@ export default function RecordItem({ kind, category, amount
     <StyleRecordItem
       className="RecordItem"
       kind={kind}
-      onDetailMode={onDetailMode}
+      $onDetailMode={onDetailMode}
       style={{
         '--labelSlide': `${labelSlide}px`,
         '--valueSlide': `${valueSlide}px`,
       }}
-      onClick={() => setOnDetailMode(true)}
+      onClick={onDetailMode === 'closed' ? openDetail : undefined}
       ref={detailRef}
     >
-      {!onDetailMode ? (
+      {onDetailMode == 'closed' ? (
         <>
           <div className={`Ilabel ${isLabelOverflow ? 'overflowed' : ''}`}>
             <span ref={labelRef}>{category}</span>
