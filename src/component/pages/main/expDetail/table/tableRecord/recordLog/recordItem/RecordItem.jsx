@@ -87,7 +87,6 @@ export default function RecordItem({ kind, category, amount
   const [labelSlide, setLabelSlide] = useState(0);
   const [valueSlide, setValueSlide] = useState(0);
 
-
   const labelRef = useRef(null);
   const valueRef = useRef(null);
 
