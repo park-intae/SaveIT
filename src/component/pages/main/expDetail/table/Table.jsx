@@ -4,6 +4,7 @@ import TableCard from "@component/styleComponent/TableCard";
 import useAddItem from "@hooks/useAddItem";
 import useWeeklyStore from "@stores/useWeeklyStore";
 import TableRecord from "./tableRecord/TableRecord";
+import SlipDateButton from "../../../../styleComponent/SlipDateButton";
 
 export default function Table() {
   const { weeklyRecords, fetchWeeklyRecords, isLoading, error } = useWeeklyStore();
@@ -54,15 +55,11 @@ export default function Table() {
   return (
     <>
       <TableCard className="table">
-        <button className="slipDateButton" onClick={addPrevDate}>
-          &lt;
-        </button>
+        <SlipDateButton onClick={addPrevDate} dir="left"></SlipDateButton>
         {date.map((dateStr) => {
           return <TableRecord key={dateStr} date={dateStr} entries={dateRecords[dateStr] || []} />;
         })}
-        <button className="slipDateButton" onClick={addNextDate}>
-          &gt;
-        </button>
+        <SlipDateButton onClick={addNextDate} dir="right"></SlipDateButton>
       </TableCard>
     </>
   );

@@ -10,5 +10,5 @@
       "@stores/*": ["@stores/*"]
     }
   },
-  "include": ["src","src/types"]
+  "include": ["src"]
 }

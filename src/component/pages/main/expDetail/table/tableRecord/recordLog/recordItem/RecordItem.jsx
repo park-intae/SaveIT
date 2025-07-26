@@ -7,17 +7,20 @@ const StyleRecordItem = styled.div`
   display: flex;
   flex-direction: ${({ $onDetailMode }) => ($onDetailMode === 'open' || $onDetailMode === 'closing' ? 'column' : 'row')};
   overflow: hidden;
-  font-size: 13px;
+  font-size: 12px;
   padding: 8px;
+  margin: 0 auto;
   background-color: white;
   border: 1px solid;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  width: 95%;
   
   max-height: ${({ $onDetailMode }) => ($onDetailMode === 'open' ? '400px' : '40px')};
   transition: max-height 0.5s ease, box-shadow 0.3s ease, transform 0.3s ease;
   
+  width: 100%;
+  gap: 8px;
+
   /* 'kind' 값에 따라 테두리 색상 동적 변경 */
   border-color: ${({ kind }) => (kind === '소비' ? '#e74c3c' : kind === '저축' ? '#27ae60' : '#333')};
 
@@ -53,13 +56,11 @@ const StyleRecordItem = styled.div`
   }
 
   .Ilabel {
-    padding-left: 5px;
     flex: 0 0 auto;
-    width: 40%;
+    width: 30%;
   }
 
   .Ivalue {
-    padding-right: 5px;
     flex: 1 1 auto;
     width: 60%;
     text-align: right;

@@ -35,7 +35,7 @@ const StyledInputForm = styled.form`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 8px;
   background-color: white;
   gap: 10px;
   width: 100%;
@@ -69,7 +69,7 @@ const StyledInputForm = styled.form`
       padding: 5px;
       text-align: center;
       border: 1px solid;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 12px;
       cursor: pointer;
     }
@@ -97,11 +97,31 @@ const StyledInputForm = styled.form`
   input[type="number"],
   textarea {
     border: 1px solid #b2c7f8;
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 5px;
     font-size: 12px;
     resize: none;
   }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+
+    .toolkit {
+      padding: 0;
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      
+      img{
+        margin: auto;      
+      }
+    }
 
   }
 `;
@@ -141,8 +161,8 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef }, re
       <h3>입력창</h3>
       <article>
         <fieldset>
-          <input type="radio" id="spend" name="kind" value="지출" />
-          <label htmlFor="spend">지출</label>
+          <input type="radio" id="spend" name="kind" value="소비" />
+          <label htmlFor="spend">소비</label>
 
           <input type="radio" id="save" name="kind" value="저축" />
           <label htmlFor="save">저축</label>
