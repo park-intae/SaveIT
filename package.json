@@ -13,6 +13,7 @@
     "@react-oauth/google": "^0.12.2",
     "apexcharts": "^5.2.0",
     "axios": "^1.10.0",
+    "js-tokens": "^9.0.1",
     "react": "^19.1.0",
     "react-apexcharts": "^1.7.0",
     "react-dom": "^19.1.0",
@@ -29,6 +30,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.2.0",
+    "rollup": "^4.45.1",
     "vite": "^7.0.0"
   }
 }

@@ -1,10 +1,12 @@
-import styled from "styled-components";
-import Table from "./table/Table";
+import styled from "styled-components"
+import Table from "./table/Table"
 
 const StyleExpDetail = styled.section`
   width: 100%;
   max-width: 1024px;
   overflow-x: auto;
+  padding: 22px 48px;
+  margin-bottom: 20px;
 `
 
 export default function ExpDetail() {

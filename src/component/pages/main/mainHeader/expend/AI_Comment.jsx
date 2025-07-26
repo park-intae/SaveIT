@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import { ResponsiveContext } from '../../../../context/ResponsiveProvider';
 import { useContext, useEffect, useState } from 'react';
 import axios from "axios";
+import { ResponsiveContext } from "@context/ResponsiveContext";
 
 const StyleComment = styled.article`
   flex: 2;
   min-width: 0;
-  text-align: ${({ isMobile }) => (isMobile ? "center" : "right")};
+  text-align: ${({ $isMobile }) => ($isMobile ? "center" : "right")};
 
   h3{
     font-size: 18px;
@@ -47,7 +47,7 @@ export default function AI_Comment() {
 
 
     return (
-        <StyleComment isMobile={isMobile}>
+        <StyleComment $isMobile={isMobile}>
             <article className='AIcomment'>
               <div>{summary}</div>
 

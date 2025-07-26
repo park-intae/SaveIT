@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { addDate, getDateString } from '../utils/dateUtil';
 
-export default function useAddItem(dateArray, setDateArray, maxCount = 7) {
+export default function useAddItem(dateArray, setDateArray, maxCount = 5) {
   const containerRef = useRef(null);
 
   // 이전 날짜 데이터 추가

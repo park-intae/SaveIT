@@ -1,6 +1,6 @@
+import Main from "../component/pages/main/Main";
+import Login from "../component/pages/login/Login";
 import { createBrowserRouter } from "react-router-dom";
-import Login from "../pages/Login";
-import Main from "../component/main/Main";
 // import NotFound from "../pages/NotFound";
 
 const routers = createBrowserRouter([
