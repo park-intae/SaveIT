@@ -3,14 +3,16 @@ import styled from 'styled-components';
 import StyleCard from './StyleCard';
 
 const StyledTableCard = styled(StyleCard)`
+  position: relative;
   display: flex;
   justify-content: space-around;
   gap: 10px;
   min-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  flex-wrap: nowrap;
+  overflow: visible;
   white-space: nowrap;
   scroll-behavior: smooth;
+  cursor: default;
 
   li {
     list-style-type: none;
