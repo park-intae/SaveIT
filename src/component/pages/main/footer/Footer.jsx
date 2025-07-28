@@ -9,6 +9,7 @@ const StyleFooter = styled.footer`
   border-top: 1px solid #e0e0e0;
   padding: ${({$isMobile, $isTablet})=>
     $isMobile ? "16px" : $isTablet ? "24px" : "20px 48px"};
+  margin-top: auto;
   display: flex;
   justify-content: ${({$isMobile, $isTablet}) =>
     $isMobile || $isTablet ? "center" : "space-between"};
@@ -21,7 +22,7 @@ const StyleFooter = styled.footer`
   line-height: 1.5;
 
   p{
-    padding: 10px 0;  
+    padding-top: 20px;
   }
 `
 const Info = styled.article`

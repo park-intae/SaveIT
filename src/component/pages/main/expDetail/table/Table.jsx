@@ -1,3 +1,5 @@
+import { ResponsiveContext } from "@context/ResponsiveContext"
+import { useContext } from "react"
 import { addDate, getDateString } from "@utils/dateUtil";
 import { useEffect, useMemo, useState } from "react";
 import TableCard from "@component/styleComponent/TableCard";
@@ -7,6 +9,10 @@ import TableRecord from "./tableRecord/TableRecord";
 import SlipDateButton from "../../../../styleComponent/SlipDateButton";
 
 export default function Table() {
+  //캘린더 반응형에 따른 갯수
+  const { isMobile, isTablet } = useContext(ResponsiveContext);
+  const visibleCount = isMobile ? 1 : isTablet ? 3 : 5;
+
   const { weeklyRecords, fetchWeeklyRecords, isLoading, error } = useWeeklyStore();
 
   const today = getDateString(new Date()); // 오늘 날짜 확인
@@ -14,13 +20,14 @@ export default function Table() {
   // 처음 랜더링될 때 기준 상태
   const [date, setDate] = useState(() => {
     const arr = [];
-    for (let i = -2; i <= 2; i++) {
+    const half = Math.floor(visibleCount / 2);
+    for (let i = -half; i <= half; i++) {
       arr.push(getDateString(addDate(today, i)));
     }
     return arr;
   });
 
-  const { addPrevDate, addNextDate } = useAddItem(date, setDate, 5); // 날짜 추가/제거 상태 관리
+  const { addPrevDate, addNextDate } = useAddItem(date, setDate, visibleCount); // 날짜 추가/제거 상태 관리
 
   // 캘린더 비동기화
   useEffect(() => {
@@ -33,6 +40,16 @@ export default function Table() {
     };
     fetchRecords();
   }, []);
+
+  // 반응형 캘린더 갯수 조절
+  useEffect(() => {
+    const half = Math.floor(visibleCount / 2);
+    const newDates = [];
+    for (let i = -half; i <= half; i++) {
+      newDates.push(getDateString(addDate(today, i)));
+    }
+    setDate(newDates);
+  }, [visibleCount, today]);
 
   // 데이터 기록 수신
   const dateRecords = useMemo(() => {

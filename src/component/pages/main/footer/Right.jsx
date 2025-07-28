@@ -12,6 +12,8 @@ const StyleRight = styled.article`
     $isMobile || $isTablet ? "center" : "flex-end"};
   text-align: ${({ $isMobile, $isTablet }) =>
     $isMobile || $isTablet ? "center" : "right"};
+  margin-top: auto;
+
 
   p{
     display: ${({ $isMobile, $isTablet }) =>
@@ -20,7 +22,7 @@ const StyleRight = styled.article`
   span{
     display: block;
     text-align: center;
-    margin-top: 8px;
+    padding-top: 12px;
   }
 `
 

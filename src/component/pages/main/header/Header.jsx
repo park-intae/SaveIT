@@ -44,8 +44,11 @@ const StyleUserInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
   white-space: nowrap;
+
+  p{
+    font-size: ${({ $isMobile, $isTablet }) => $isMobile ? "13px" : $isTablet ? "13px" : "15px"};
+  }
 `
 
 export default function Header() {
@@ -64,7 +67,7 @@ export default function Header() {
                 )}
             </StyleCenter>
             <StyleRight $isMobile={isMobile} className='login'>
-                <StyleUserInfo>
+                <StyleUserInfo $isMobile={isMobile} $isTablet={isTablet}>
                   <StyleProfile className="profile" src={profile} />
                   <p>홍길동님, 환영합니다!</p>
                 </StyleUserInfo>

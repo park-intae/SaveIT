@@ -4,14 +4,12 @@ import { useState } from "react"
 import ButtonGroup from "@component/styleComponent/ButtonGroup";
 import styled from "styled-components";
 import close from "@assets/close.svg";
-import edit from "@assets/pencil.svg";
+import edit from "@assets/edit.svg";
 
 const StyleItemDetail = styled.div`
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
     display: flex;
     flex-direction: column;
@@ -22,12 +20,15 @@ const StyleItemDetail = styled.div`
     article {
         display: flex;
         flex-direction: column;
-        gap: 0.3rem;
+        gap: 0.5rem;
+        padding: 15px 0;
+        font-size: 13px;
     }
     
     article input{
-        padding: 2px 0;
-        border: none;
+        padding: 2px 5px;
+        border: 1px solid #888;
+        border-radius: 4px;
         outline: none;
     }
     
@@ -37,6 +38,7 @@ const StyleItemDetail = styled.div`
     
     article input:focus{
         background-color: #efefef;
+        border: 1.5px solid #2F80ED;
     }
     `
 
@@ -44,7 +46,8 @@ const StyleToggleBtn = styled.label`
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: 0.1rem;
+    gap: 0.3rem;
+    color: #777;
     cursor: pointer;
 
     input[type=checkbox]{
@@ -52,10 +55,10 @@ const StyleToggleBtn = styled.label`
         display: flex;
         align-items: center;
         position: relative;
-        border: 2px solid gray;
-        border-radius: 1.5rem;
-        width: 1.8rem;
-        height: 1rem;
+        border: 1.2px solid #2F80ED;
+        border-radius: 20px;
+        width: 1.7rem;
+        height: 0.9rem;
     }
 
     input[type=checkbox]::before{
@@ -63,11 +66,11 @@ const StyleToggleBtn = styled.label`
         transform: translateY(-50%);
         content:'';
         position: absolute;
-        width: 0.7rem;
-        height: 0.7rem;
-        margin-left: 1px;
+        width: 0.6rem;
+        height: 0.6rem;
+        margin-left: 1.8px;
         border-radius: 100%;
-        background-color: gray;
+        background-color: #2F80ED;
     }
 
     input[type=checkbox]:checked::before{
@@ -102,7 +105,7 @@ export default function ItemLog({ setOnDetailMod, category, amount
                 )
             }
             <ButtonGroup>
-                {isModify && <button onClick={() => setOnDetailMod('closing')} ><img src={edit}/></button>}
+                {isModify && <button onClick={() => setOnDetailMod('closing')} ><img src={edit} className="edit"/></button>}
                 <button onClick={()=>setOnDetailMod('closing')} className="close">
                     <img src={close} />
                 </button>

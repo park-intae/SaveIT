@@ -67,12 +67,7 @@ const LoginFooter = styled.footer`
     $isMobile || $isTablet ? "center" : "left"};
 
   p {
-    margin: 4px 0;
-    line-height: 1.4;
-  }
-  span {
-    margin-top: 6px;
-    display: block;
+    padding-top: 20px;
   }
 `;
 const FootLeft = styled.div`
@@ -89,16 +84,17 @@ const FootRight = styled.div`
   text-align: ${({ $isMobile, $isTablet }) =>
     $isMobile || $isTablet ? "center" : "right"};
   font-size: ${({$isMobile})=>($isMobile ? "9px" : "13px")};
+  margin-top: auto;
 
   p{
-  display: ${({ $isMobile, $isTablet }) =>
-    $isMobile || $isTablet ? "none" : "block"};
+    display: ${({ $isMobile, $isTablet }) =>
+      $isMobile || $isTablet ? "none" : "block"};
   }
 
   span {
     display: block;
     text-align: center;
-    margin-top: 8px;
+    padding-top: 12px;
   }
 `;
 function Login() {
