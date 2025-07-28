@@ -5,7 +5,7 @@ import Current from "./Current";
 
 const GoalCard = styled(StyleCard)`
   flex: 0 1 35%;
-  min-width: 300px;
+  min-width: 100%;
 ` 
 
 export default function Goal() {
