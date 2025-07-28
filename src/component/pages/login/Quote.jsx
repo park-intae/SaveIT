@@ -16,6 +16,14 @@ const TickerWrapper = styled.div`
   margin: 2rem 0;
 `;
 
+const TickerText = styled.p`
+  display: inline-block;
+  padding-left: 100%;
+  animation: ${slideLeft} 15s linear infinite;
+  font-size: 1rem;
+  white-space: nowrap;
+`
+
 export default function Quote() {
   const [quotes, setQuotes] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -54,7 +62,7 @@ export default function Quote() {
         }
         return nextIdx;
       });
-    }, 10000);
+    }, 13000);
     return () => clearInterval(timerRef.current);
   }, [quotes]);
 
@@ -63,13 +71,17 @@ export default function Quote() {
 
   return (
     <StyleQuote>
-      {quote ? (
-        <p>
-          "{quote.content}" — {quote.author}
-        </p>
-      ) : (
-        <p>명언을 불러오는 중...</p>
-      )}
+      <TickerWrapper>
+        <TickerText>
+          {quote ? (
+            <p>
+              "{quote.content}" — {quote.author}
+            </p>
+          ) : (
+            <p>명언을 불러오는 중...</p>
+          )}
+        </TickerText>
+      </TickerWrapper>
     </StyleQuote>
   );
 }
