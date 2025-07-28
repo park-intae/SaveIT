@@ -3,10 +3,11 @@
 import { GoogleLogin } from "@react-oauth/google";
 import { CallQuote } from "@utils/callQuote";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "@assets/login_logo.svg";
+import { ResponsiveContext } from "@context/ResponsiveContext";
 
 const LoginWrapper = styled.div`
   min-height: 100vh;
@@ -21,7 +22,7 @@ const LoginLogo = styled.div`
 `;
 const StyleLogo = styled.img`
   display: block;
-  width: auto;
+  width: ${({$isMobile})=>($isMobile ? '70%' : 'auto')};
   height: auto;
   margin: 0 auto;
 `;
@@ -53,12 +54,17 @@ const LoginFooter = styled.footer`
   max-width: 1024px;
   width: 100%;
   margin: 50px auto 20px;
-  padding-top: 20px;
+  padding: ${({$isMobile, $isTablet})=>
+    $isMobile ? "16px" : $isTablet ? "24px" : "20px 48px"};
   border-top: 1px solid #e0e0e0;
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({isMobile, isTablet}) =>
+    isMobile || isTablet ? "center" : "space-between"};
   flex-wrap: wrap;
   font-size: 13px;
+  line-height: 1.5;
+  text-align: ${({$isMobile, $isTablet}) =>
+    $isMobile || $isTablet ? "center" : "left"};
 
   p {
     margin: 4px 0;
@@ -70,7 +76,7 @@ const LoginFooter = styled.footer`
   }
 `;
 const FootLeft = styled.div`
-  display: block;
+  display: ${({ $isMobile, $isTablet }) => ($isMobile || $isTablet ? "none" : "block")};
   flex: 3;
 `;
 const FootRight = styled.div`
@@ -78,8 +84,16 @@ const FootRight = styled.div`
   flex: 2;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
+  align-items: ${({ $isMobile, $isTablet }) =>
+    $isMobile || $isTablet ? "center" : "flex-end"};
+  text-align: ${({ $isMobile, $isTablet }) =>
+    $isMobile || $isTablet ? "center" : "right"};
+  font-size: ${({$isMobile})=>($isMobile ? "9px" : "13px")};
+
+  p{
+  display: ${({ $isMobile, $isTablet }) =>
+    $isMobile || $isTablet ? "none" : "block"};
+  }
 
   span {
     display: block;
@@ -88,6 +102,7 @@ const FootRight = styled.div`
   }
 `;
 function Login() {
+  const {isMobile, isTablet} = useContext(ResponsiveContext);
   const navigate = useNavigate();
   const [quote, setQuote] = useState(null);
 
@@ -145,7 +160,7 @@ function Login() {
   return (
     <LoginWrapper>
       <LoginLogo>
-        <StyleLogo className="logo" src={logo} alt="로고" />
+        <StyleLogo $isMobile={isMobile} className="logo" src={logo} alt="로고" />
       </LoginLogo>
       <LoginBtn>
         <GoogleLogin ux_mode="popup" onSuccess={handleLoginSuccess} onError={() => console.log('구글 로그인 실패')} />
@@ -158,8 +173,9 @@ function Login() {
       ) : (
         <p>명언을 불러오는 중...</p>
       )}
-      <LoginFooter>
-        <FootLeft>
+
+      <LoginFooter $isMobile={isMobile} $isTablet={isTablet}>
+          <FootLeft $isMobile={isMobile} $isTablet={isTablet}>
           <p>
             (주)세이빗 | 대표 Thein 2Team
             <br />
@@ -169,7 +185,7 @@ function Login() {
           </p>
           <p>고객센터 1588-1234 (평일 09:00~18:00) | E-mail support@saveit.co.kr</p>
         </FootLeft>
-        <FootRight>
+        <FootRight $isMobile={isMobile} $isTablet={isTablet}>
           <p>이용약관 | 개인정보처리방침 | 전자금융거래약관 | 청소년보호정책</p>
           <span>© 2025 SaveIT, Inc. All rights reserved.</span>
         </FootRight>
