@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "@assets/login_logo.svg";
 import { ResponsiveContext } from "@context/ResponsiveContext";
+import Quote from "./Quote";
 
 const LoginWrapper = styled.div`
   min-height: 100vh;
