@@ -141,8 +141,8 @@ function Login() {
   };
 
   return (
-    <LoginWrapper>
-      <LoginLogo>
+    <LoginWrapper className="LoginWrapper">
+      <LoginLogo className="LoginLogo">
         <StyleLogo $isMobile={isMobile} className="logo" src={logo} alt="로고" />
       </LoginLogo>
       <LoginBtn>

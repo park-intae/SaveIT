@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const slideLeft = keyframes`
-    0%{transform: translateX(100%);}
+    0%{transform: translateX(70%);}
     100%{transform: translateX(-100%);}
 `;
 
@@ -13,15 +13,18 @@ const TickerWrapper = styled.div`
   overflow: hidden;
   white-space: nowrap;
   height: 40px;
-  margin: 2rem 0;
+  overflow: hidden;
 `;
 
 const TickerText = styled.p`
   display: inline-block;
-  padding-left: 100%;
-  animation: ${slideLeft} 15s linear infinite;
+  animation: ${slideLeft} 120s linear infinite;
   font-size: 1rem;
   white-space: nowrap;
+
+  span{
+    margin-right: 30rem;
+  }
 `
 
 export default function Quote() {
@@ -30,7 +33,7 @@ export default function Quote() {
   const timerRef = useRef(null);
 
   const fetchQuotes = async () => {
-    const results = await CallQuote(['business', 'success', 'famous'], 5);
+    const results = await CallQuote(['business', 'success', 'famous'], 10);
     setQuotes(results);
     setCurrentIdx(0);
   };
@@ -71,15 +74,13 @@ export default function Quote() {
 
   return (
     <StyleQuote>
-      <TickerWrapper>
-        <TickerText>
-          {quote ? (
-            <p>
-              "{quote.content}" — {quote.author}
-            </p>
-          ) : (
-            <p>명언을 불러오는 중...</p>
-          )}
+      <TickerWrapper className='tickerWrapper'>
+        <TickerText className='tickerText'>
+          {quotes.map((q, i) => (
+            <span key={i}>
+              “{q.content}” — {q.author}
+            </span>
+          ))}
         </TickerText>
       </TickerWrapper>
     </StyleQuote>

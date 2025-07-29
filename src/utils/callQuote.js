@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-async function CallQuote(tags = [], limit = 5) {
+async function CallQuote(tags = [], limit = 10) {
   if (!tags || tags.length == 0) {
     throw new Error('태그가 입력되지 않았습니다');
   }
