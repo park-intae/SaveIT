@@ -15,7 +15,8 @@ const StyleExpGraph = styled.article`
 
 export default function Graph() {
   const [state, setState] = useState({
-    series: [2900, 5500, 2500, 4300, 3200],
+    series: [],
+    ratio: [],
     options: {
       chart: {
         type: "pie",
@@ -24,7 +25,7 @@ export default function Graph() {
           dataPointSelection: () => {}, // 클릭 무력화
         },
       },
-      labels: ["식비", "교통비", "간식", "운동", "비상금"],
+      labels: [],
       colors: ["#4FADF7", "#70D6FF", "#FFD670", "#FF9770", "#9D79BC"],
       tooltip: {
         theme: "light",
@@ -37,10 +38,7 @@ export default function Graph() {
           show: false,
         },
         y: {
-          formatter: (val, options) => {
-            const label = options?.w?.config?.labels?.[options.seriesIndex] ?? '';
-            return `${label}: ${val.toLocaleString()}원`;
-          },
+          formatter: () => "", // 초기화 시 빈 문자열
         },
       },
       dataLabels: {
@@ -50,7 +48,10 @@ export default function Graph() {
           fontWeight: "300",
           colors: ["#fff"],
         },
-        formatter: (val) => `${val.toFixed(1)}%`,
+        formatter: (_, options) => {
+          const label = options?.w?.config?.labels?.[options.seriesIndex] ?? "";
+          return label;
+        },
         dropShadow: {
           enabled: true,
         },
@@ -98,14 +99,37 @@ export default function Graph() {
         }
       )
       .then((res) => {
-        setState((prev) => ({
-          ...prev,
-          series: res.data.series,
-          options: {
-            ...prev.options,
-            labels: res.data.labels,
+        const newSeries = res.data.series;
+        const newLabels = res.data.labels;
+        const newRatio = res.data.ratio;
+
+        const updatedOptions = {
+          ...state.options,
+          labels: newLabels,
+          tooltip: {
+            ...state.options.tooltip,
+            y: {
+              formatter: (_, options) => {
+                //const label = newLabels?.[options.seriesIndex] ?? "";
+                const percent = newRatio?.[options.seriesIndex] ?? 0;
+                return ` ${percent}%`;
+              },
+            },
           },
-        }));
+          dataLabels: {
+            ...state.options.dataLabels,
+            formatter: (_, options) => {
+              const label = newLabels?.[options.seriesIndex] ?? "";
+              return label; 
+            },
+          },
+        };
+
+        setState({
+          series: newSeries,
+          ratio: newRatio,
+          options: updatedOptions,
+        });
       })
       .catch((err) => {
         console.log("실패:", err);

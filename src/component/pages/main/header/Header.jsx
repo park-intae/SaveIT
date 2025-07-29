@@ -39,20 +39,21 @@ const StyleRight = styled.div`
 const StyleProfile = styled.img`
   display: block;
   height: clamp(18px, 4vw, 28px);
-`
+  `
 const StyleUserInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  white-space: nowrap;
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 14px;
+white-space: nowrap;
 `
 
 export default function Header() {
-    const {isMobile, isTablet} = useContext(ResponsiveContext);
+  const {isMobile, isTablet} = useContext(ResponsiveContext);
+  const name = localStorage.getItem("name") || "사용자";
 
     return (
-        <StyleHeader $isMobile={isMobile} $isTablet={isTablet}>
+      <StyleHeader $isMobile={isMobile} $isTablet={isTablet}>
             <StyleLeft $isMobile={isMobile}>
                 {isMobile && (
                   <StyleLogo className="logo" src={mobileLogo} alt="로고" />
@@ -66,7 +67,8 @@ export default function Header() {
             <StyleRight $isMobile={isMobile} className='login'>
                 <StyleUserInfo>
                   <StyleProfile className="profile" src={profile} />
-                  <p>홍길동님, 환영합니다!</p>
+
+                  <p>{name}님, 환영합니다!</p>
                 </StyleUserInfo>
                 {/* {isLogin === 'false' ? <button>구글 로그인</button>:<div><img className='profile'></img><p>{userName}</p></div>} */}
             </StyleRight>

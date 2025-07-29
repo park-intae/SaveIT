@@ -150,6 +150,9 @@ function Login() {
       });
 
       console.log('로그인한 유저:', userRes.data);
+      const name = userRes.data.name;
+      localStorage.setItem('name', name);
+
 
       navigate('/main'); // 페이지 이동
     } catch (error) {
