@@ -25,7 +25,7 @@ export default function Graph() {
           dataPointSelection: () => {}, // 클릭 무력화
         },
       },
-      labels: [], // 백에서 받아옴
+      labels: [],
       colors: ["#4FADF7", "#70D6FF", "#FFD670", "#FF9770", "#9D79BC"],
       tooltip: {
         theme: "light",
@@ -112,7 +112,7 @@ export default function Graph() {
               formatter: (_, options) => {
                 //const label = newLabels?.[options.seriesIndex] ?? "";
                 const percent = newRatio?.[options.seriesIndex] ?? 0;
-                return ` ${percent.toFixed(1)}%`;
+                return ` ${percent}%`;
               },
             },
           },
