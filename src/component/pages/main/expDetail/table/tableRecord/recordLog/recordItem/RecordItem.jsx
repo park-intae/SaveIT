@@ -15,7 +15,7 @@ const StyleRecordItem = styled.div`
   // border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   
-  max-height: ${({ $onDetailMode }) => ($onDetailMode === 'open' ? '400px' : '40px')};
+  // max-height: ${({ $onDetailMode }) => ($onDetailMode === 'open' ? '400px' : '40px')};
   transition: max-height 0.5s ease, box-shadow 0.3s ease, transform 0.3s ease;
   
   width: 100%;
