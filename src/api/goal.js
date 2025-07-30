@@ -1,12 +1,41 @@
 // import axios from "/node_modules/.vite/deps/axios.js?v=a717f434"
 
-import  useTokenStore  from "../store/useTokenStore"
+import  useTokenStore  from "@stores/useTokenStore"
 
+
+export async function getUserExpense() {
+  const token = useTokenStore.getState().token;
+
+  const response = await fetch("http://localhost:8080/api/goal/expense", {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!response.ok) throw new Error("서버 오류");
+  return await response.json();
+}
+
+export async function getUserSave() {
+  const token = useTokenStore.getState().token;
+
+  const response = await fetch("http://localhost:8080/api/goal/save", {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!response.ok) throw new Error("서버 오류");
+  return await response.json();
+}
 
 export async function getUserGoal() {
   const token = useTokenStore.getState().token;
 
-  
   const response = await fetch("http://localhost:8080/api/goal", {
     method: "GET",
     headers: {

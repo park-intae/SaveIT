@@ -50,15 +50,9 @@ export default function RecordSumm({ expense, save }) {
 
     return (
         <StyleSumm className="summary">
-<<<<<<< HEAD:src/component/main/expDetail/table/tableRecord/RecordSumm.jsx
             <p className="exspand"><span className="label">소비</span> <span className="value">₩{totalExpense}</span></p>
             <p className="saving"><span className="label">저축</span> <span className="value">₩{totalSave}</span></p>
 
-=======
-            {/* <h3>{date}</h3> */}
-            <p className="exspand"><span className="label">소비</span> <span className="value">₩ {totalConsumption.toLocaleString()}</span></p>
-            <p className="saving"><span className="label">저축</span> <span className="value">₩ {totalSaving.toLocaleString()}</span></p>
->>>>>>> origin/master:src/component/pages/main/expDetail/table/tableRecord/RecordSumm.jsx
         </StyleSumm>
     )
 }

@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import useTokenStore from '@stores/useTokenStore';
 import logo from "@assets/login_logo.svg";
 
 const LoginWrapper = styled.div`
@@ -89,6 +90,7 @@ const FootRight = styled.div`
 `;
 function Login() {
   const navigate = useNavigate();
+  const { setToken } = useTokenStore();
   const [quote, setQuote] = useState(null);
 
   useEffect(() => {
@@ -105,7 +107,7 @@ function Login() {
     //   });
     // })(); // 즉시 시행;
   }, []);
-
+  
   // //명언 비동기 대기
   // if (!quote) return <p>불러오는 중...</p>;
 
@@ -125,7 +127,8 @@ function Login() {
       );
 
       const jwt = res.data.jwt;
-      localStorage.setItem('jwt', jwt);
+      // localStorage.setItem("jwt", jwt);
+      setToken(jwt);
       alert('로그인 성공!');
 
       const userRes = await axios.get('http://localhost:8080/user/info', {

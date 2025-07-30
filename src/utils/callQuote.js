@@ -10,6 +10,8 @@ export async function CallQuote(tags) {
 
   try {
     const res = await axios.get(url);
+
+    console.log(res)
     return {
       content: res.data.content,
       author: res.data.author,

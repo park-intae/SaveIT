@@ -10,16 +10,16 @@ const StyleRecordItem = styled.div`
   font-size: 12px;
   padding: 8px;
   margin: 0 auto;
-  background-color: white;
-  border: 1px solid;
-  border-radius: 8px;
+  // background-color: white;
+  // border: 1px solid;
+  // border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   width: 100%;
   gap: 8px;
 
   /* 'kind' 값에 따라 테두리 색상 동적 변경 */
-  border-color: ${({ kind }) => (kind === '소비' ? '#e74c3c' : kind === '저축' ? '#27ae60' : '#333')};
+  // border-color: ${({ kind }) => (kind === '소비' ? '#e74c3c' : kind === '저축' ? '#27ae60' : '#333')};
 
   &:hover {
     box-shadow: 0 4px 10px rgba(50, 50, 50, 0.1);
@@ -65,7 +65,7 @@ const StyleRecordItem = styled.div`
 `;
 
 // memo 주석 효과 지워야됨
-export default function RecordItem({ kind, category, amount
+export default function RecordItem({ item
   //, memo
 }) {
   //상세보기 길이판단
@@ -107,13 +107,13 @@ export default function RecordItem({ kind, category, amount
       }
     });
     return () => cancelAnimationFrame(id);
-  }, [category, amount]);
+  }, []);
 
 
   return (
     <StyleRecordItem
       className="RecordItem"
-      kind={kind}
+      kind={item.kind}
       onDetailMode={onDetailMode}
       style={{
         '--labelSlide': `${labelSlide}px`,
@@ -125,16 +125,16 @@ export default function RecordItem({ kind, category, amount
       {!onDetailMode ? (
         <>
           <div className={`Ilabel ${isLabelOverflow ? 'overflowed' : ''}`}>
-            <span ref={labelRef}>{category}</span>
+            <span ref={labelRef}>{item.category}</span>
           </div>
           <div className={`Ivalue ${isValueOverflow ? 'overflowed' : ''}`}>
-            {typeof amount === 'number' ? `₩${amount.toLocaleString()}` : '데이터 없음'}
+            {typeof item.amount === 'number' ? `₩${item.amount}` : '데이터 없음'}
           </div>
         </>
       ) :
         <ItemLog
-          category={category}
-          amount={amount}
+          category={item.category}
+          amount={item.amount}
         />
       }
     </StyleRecordItem>

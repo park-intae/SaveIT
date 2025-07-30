@@ -2,7 +2,7 @@ import alter from '@assets/pencil.svg'
 import styled from 'styled-components';
 
 import { useEffect, useRef, useState } from "react";
-import { getUserGoal, postUserGoal } from "../../../../api/goal.js";
+import { getUserGoal, getUserSave, postUserGoal } from "@api/goal.js";
 
 
 const StyleCurrent = styled.div`
@@ -56,13 +56,22 @@ export default function Current() {
   const focusRef = useRef(null)
   const prevGoal = useRef("")
 
-  // 목업 데이터 가져오기
-  const [user, setUser] = useState([])
+  // 
+  const [totalSave, setTotalSave] = useState(0);
+  
+  useEffect(()=> {
+      getUserSave()
+      .then((res)=> {
+        // console.log(res)
+            setTotalSave(res.totalSave)
+        })
+      .catch((err) => console.error("데이터 불러오기 실패", err))
+    }, [])
+
 
   useEffect(()=> {
     getUserGoal()
-    .then((res)=> {setUser(res)
-      // console.log(res)
+    .then((res)=> {
           setInputGoal(res.goalAmount)
       })
     .catch((err) => console.error("데이터 불러오기 실패", err))
@@ -118,7 +127,7 @@ export default function Current() {
       <p>목표달성 현황</p>
 
       <div className="goalSummary">
-        <div className="saveMoney">원</div>
+        <div className="saveMoney">{totalSave}원</div>
 
         {visual ?
             <>
