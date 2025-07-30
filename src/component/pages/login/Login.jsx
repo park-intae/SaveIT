@@ -1,14 +1,14 @@
 // import { translateText } from '../utils/translateText'; 번역기능 import
 
 import { GoogleLogin } from "@react-oauth/google";
-import { CallQuote } from "@utils/callQuote";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useTokenStore from '@stores/useTokenStore';
 import logo from "@assets/login_logo.svg";
 import { ResponsiveContext } from "@context/ResponsiveContext";
+import Quote from "./Quote";
 
 const LoginWrapper = styled.div`
   min-height: 100vh;
@@ -33,24 +33,7 @@ const LoginBtn = styled.div`
   align-items: center;
   margin-bottom: 3rem;
 `;
-const Quote = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 3rem 0;
 
-  h1 {
-    font-size: 20px;
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 12px;
-  }
-  p {
-    font-size: 14px;
-    color: #999;
-  }
-`;
 const LoginFooter = styled.footer`
   max-width: 1024px;
   width: 100%;
@@ -106,25 +89,25 @@ function Login() {
   const {isMobile, isTablet} = useContext(ResponsiveContext);
   const navigate = useNavigate();
   const { setToken } = useTokenStore();
-  const [quote, setQuote] = useState(null);
+  // const [quote, setQuote] = useState(null);
 
-  useEffect(() => {
-    CallQuote(['business', 'success', 'famous-quotes']).then(setQuote);
+  // useEffect(() => {
+  //   CallQuote(['business', 'success', 'famous-quotes']).then(setQuote);
 
-    // 번역 버전인데 cors 오류 있어서 백단이랑 같이 처리해야됨
-    // (async () => {
-    //   const raw = await CallQuote(['business', 'success', 'famous-qutes']); // 명언 api 호출
-    //   const translated = await translateText(raw.content); // 번역 api 호출
-    //   setQuote({
-    //     original: raw.content,
-    //     translated,
-    //     author: raw.author,
-    //   });
-    // })(); // 즉시 시행;
-  }, []);
-  
-  // //명언 비동기 대기
-  // if (!quote) return <p>불러오는 중...</p>;
+  //   // 번역 버전인데 cors 오류 있어서 백단이랑 같이 처리해야됨
+  //   // (async () => {
+  //   //   const raw = await CallQuote(['business', 'success', 'famous-qutes']); // 명언 api 호출
+  //   //   const translated = await translateText(raw.content); // 번역 api 호출
+  //   //   setQuote({
+  //   //     original: raw.content,
+  //   //     translated,
+  //   //     author: raw.author,
+  //   //   });
+  //   // })(); // 즉시 시행;
+  // }, []);
+
+  // // //명언 비동기 대기
+  // // if (!quote) return <p>불러오는 중...</p>;
 
   const handleLoginSuccess = async (credentialResponse) => {
     const idToken = credentialResponse.credential;
@@ -164,22 +147,14 @@ function Login() {
   };
 
   return (
-    <LoginWrapper>
-      <LoginLogo>
+    <LoginWrapper className="LoginWrapper">
+      <LoginLogo className="LoginLogo">
         <StyleLogo $isMobile={isMobile} className="logo" src={logo} alt="로고" />
       </LoginLogo>
       <LoginBtn>
         <GoogleLogin ux_mode="popup" onSuccess={handleLoginSuccess} onError={() => console.log('구글 로그인 실패')} />
       </LoginBtn>
-      {quote ? (
-        <Quote>
-          <h1>"{quote.content}"</h1>
-          <p>— {quote.author}</p>
-        </Quote>
-      ) : (
-        <p>명언을 불러오는 중...</p>
-      )}
-
+      <Quote />
       <LoginFooter $isMobile={isMobile} $isTablet={isTablet}>
           <FootLeft $isMobile={isMobile} $isTablet={isTablet}>
           <p>
