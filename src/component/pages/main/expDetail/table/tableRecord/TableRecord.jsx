@@ -17,12 +17,12 @@ const StyleTableRecord = styled.article`
   }
 `;
 
-export default function TableRecord({ date, entries }) {
+export default function TableRecord({ date, expense, save, offset }) {
   return (
     <StyleTableRecord className="tableRecord">
       <h3>{date}</h3>
-      <RecordSumm entries={entries} />
-      <RecordLog entries={entries} />
+      <RecordSumm expense={expense} save={save}/>
+      <RecordLog expense={expense} save={save} date={date} offset={offset}/>
     </StyleTableRecord>
   );
 }
