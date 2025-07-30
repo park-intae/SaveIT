@@ -13,7 +13,7 @@ export default function Table() {
   const { isMobile, isTablet } = useContext(ResponsiveContext);
   const visibleCount = isMobile ? 1 : isTablet ? 3 : 5;
 
-  const { weeklyRecords, fetchSave, fetchExpense, isLoadingExpense,
+  const { fetchSave, fetchExpense, isLoadingExpense,
     isLoadingSave, error } = useWeeklyStore();
   const expenseData = useWeeklyStore((state) => state.expenseData);
   const saveData = useWeeklyStore((state) => state.saveData);

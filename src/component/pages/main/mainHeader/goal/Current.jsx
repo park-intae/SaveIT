@@ -1,6 +1,7 @@
 import { ResponsiveContext } from "@context/ResponsiveContext"
 import { useContext } from "react"
 import alter from '@assets/pencil.svg'
+import check from '@assets/check.svg'
 import styled from 'styled-components';
 
 import { useEffect, useRef, useState } from "react";
@@ -18,16 +19,64 @@ const StyleCurrent = styled.div`
         display: flex;
         align-items: baseline;
         gap: 5px;
+        white-space: nowrap;
     }
     span{
         font-size: 15px;
         color: #888;
     }
-    .alter {
-        display: inline-block;
-        width: 20px;
+    .moneyInput{
+        overflow: hidden;
+        max-width: 85px;
+    }
+    .money{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    button{
+        background: transparent;
+        padding: 0;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .check{
+        display: block;
+        object-fit: contain;
+        width: 24px;
+        height: 24px;
         cursor: pointer;
-        margin: auto 0;
+    }
+    .alter {
+        display: block;
+        object-fit: contain;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+    input{
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 15px;
+        width: 80px;
+        outline: none;
+        text-align: right;
+        color: #777;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input:focus {
+        border-color: #007aff;
     }
     .progressBar {
         background-color: #eee;
@@ -59,6 +108,10 @@ const StyleCurrent = styled.div`
 export default function Current() {
   const {isMobile, isTablet} = useContext(ResponsiveContext);
 
+  let current = 250000;
+  let goal = 500000;
+
+  let percent = Math.round((current/ goal) * 100);
 
   const [visual, setVisual] = useState(false)
   const [inputGoal, setInputGoal] = useState("")
@@ -131,42 +184,55 @@ export default function Current() {
   }
 
   return (
-    <StyleCurrent>
+    <StyleCurrent $isMobile={isMobile} $isTablet={isTablet}>
       <div className="current">
       <p>목표달성 현황</p>
 
       <div className="goalSummary">
         <div className="saveMoney">{totalSave}원</div>
 
-        {visual ?
-            <>
-            <input value={inputGoal} type="number" required
-            ref={focusRef} onChange={handleChange} onKeyDown={handleKeyDown}/>
+        <div className="money">
+            <span>/</span>
 
-            <span>원</span>
-            </>
-            : 
-            <p>{inputGoal}원</p>
-        }
-        
+            {visual ?
+                <>
+                <input
+                  value={inputGoal}
+                  type="number" 
+                  required
+                  ref={focusRef}
+                  onChange={handleChange}
+                  onKeyDown={handleKeyDown}
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                />
 
-        {visual ? 
-        <button onClick={handleClick} type="button">
-            <p>확인</p>
-        </button>
-        :
-        <button onClick={handleFocus} type="button">
-            <img className="alter" src={alter} alt="수정하기" />
-        </button>
-        }
-    
-        
-      </div>
+                <span>원</span>
+                </>
+                : 
+                <span className="moneyInput">
+                  {inputGoal}                
+                </span>
+            }
+            
 
-      {/* <div className='progressBar'>
+            {visual ? 
+            <button onClick={handleClick} type="button">
+              <img className="check" src={check} alt="수정완료"/>
+            </button>
+            :
+            <button onClick={handleFocus} type="button" src={alter} alt="수정하기">
+              <span>원</span>
+              <img className="alter" src={alter} alt="수정하기" />
+            </button>
+            }
+          </div>
+        </div>
+
+      <div className='progressBar'>
           <div className='fill' style={{ width: `${percent}%` }} />
           <div className='percentText'>{percent}%</div>
-      </div> */}
+      </div>
 
     </div>
     </StyleCurrent>
