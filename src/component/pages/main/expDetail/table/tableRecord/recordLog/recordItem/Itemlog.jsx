@@ -13,7 +13,7 @@ const StyleItemDetail = styled.div`
     vertical-align: baseline;
     display: flex;
     flex-direction: column;
-
+    width: 100%;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
 

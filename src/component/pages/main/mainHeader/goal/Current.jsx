@@ -3,7 +3,6 @@ import { useContext } from "react"
 import alter from '@assets/pencil.svg'
 import check from '@assets/check.svg'
 import styled from 'styled-components';
-
 import { useEffect, useRef, useState } from "react";
 import { getUserGoal, getUserSave, postUserGoal } from "@api/goal.js";
 
@@ -108,10 +107,6 @@ const StyleCurrent = styled.div`
 export default function Current() {
   const {isMobile, isTablet} = useContext(ResponsiveContext);
 
-  let current = 250000;
-  let goal = 500000;
-
-  let percent = Math.round((current/ goal) * 100);
 
   const [visual, setVisual] = useState(false)
   const [inputGoal, setInputGoal] = useState("")
@@ -120,11 +115,10 @@ export default function Current() {
 
   // 
   const [totalSave, setTotalSave] = useState(0);
-  
+
   useEffect(()=> {
       getUserSave()
       .then((res)=> {
-        // console.log(res)
             setTotalSave(res.totalSave)
         })
       .catch((err) => console.error("데이터 불러오기 실패", err))
@@ -162,7 +156,7 @@ export default function Current() {
   // 키보드 입력을 확인하는 함수
   const handleKeyDown = (e)=> {
     if(e.key === "Enter") {
-        setVisual(false)
+        handleClick();
     }
     else if(e.key === "Escape") {
       setInputGoal(prevGoal.current)
@@ -180,8 +174,11 @@ export default function Current() {
         console.error("에러 발생: ", err.message);
     }
 
-    console.log(inputGoal)
   }
+
+  let saveMoney = totalSave
+
+  let percent = Math.round((saveMoney / inputGoal) * 100);
 
   return (
     <StyleCurrent $isMobile={isMobile} $isTablet={isTablet}>
