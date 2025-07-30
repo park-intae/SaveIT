@@ -109,7 +109,7 @@ function Login() {
     const idToken = credentialResponse.credential;
     try {
       const res = await axios.post(
-        'http://saveit-production.up.railway.app/auth/google',
+        'https://saveit-production.up.railway.app/auth/google',
         { token: idToken },
         {
           headers: {
@@ -124,7 +124,7 @@ function Login() {
       setToken(jwt);
       alert('로그인 성공!');
 
-      const userRes = await axios.get('http://localhost:8080/user/info', {
+      const userRes = await axios.get('https://saveit-production.up.railway.app/user/info', {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },

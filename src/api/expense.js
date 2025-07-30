@@ -5,7 +5,7 @@ export async function getExpense(offset = 0) {
     const token = useTokenStore.getState().token;
 
     try {
-        const response = await axios.get(`http://localhost:8080/api/expense?offset=${offset}`, {
+        const response = await axios.get(`https://localhost:8080/api/expense?offset=${offset}`, {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ export async function getExpense(offset = 0) {
 export async function postExpense(day, kind, category, amount) {
     const token = useTokenStore.getState().token;
 
-    const response = await fetch("http://localhost:8080/api/expense?", {
+    const response = await fetch("https://localhost:8080/api/expense?", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
