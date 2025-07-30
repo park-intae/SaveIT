@@ -59,6 +59,10 @@ const StyleCurrent = styled.div`
 export default function Current() {
   const {isMobile, isTablet} = useContext(ResponsiveContext);
 
+  let current = 250000;
+  let goal = 500000;
+
+  let percent = Math.round((current/ goal) * 100);
 
   const [visual, setVisual] = useState(false)
   const [inputGoal, setInputGoal] = useState("")
@@ -163,10 +167,10 @@ export default function Current() {
         
       </div>
 
-      {/* <div className='progressBar'>
+      <div className='progressBar'>
           <div className='fill' style={{ width: `${percent}%` }} />
           <div className='percentText'>{percent}%</div>
-      </div> */}
+      </div>
 
     </div>
     </StyleCurrent>
