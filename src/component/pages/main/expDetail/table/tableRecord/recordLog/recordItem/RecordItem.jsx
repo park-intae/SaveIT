@@ -5,7 +5,7 @@ import useHandleClickOutside from '@hooks/useHandleClickOutside';
 
 const StyleRecordItem = styled.div`
   display: flex;
-  flex-direction: ${({ onDetailMode }) => (onDetailMode ? 'column' : 'row')};
+  flex-direction: ${({ $onDetailMode }) => ($onDetailMode === 'open' || $onDetailMode === 'closing' ? 'column' : 'row')};
   overflow: hidden;
   font-size: 12px;
   padding: 8px;
@@ -14,7 +14,10 @@ const StyleRecordItem = styled.div`
   // border: 1px solid;
   // border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  
+  max-height: ${({ $onDetailMode }) => ($onDetailMode === 'open' ? '400px' : '40px')};
+  transition: max-height 0.5s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  
   width: 100%;
   gap: 8px;
 
@@ -40,6 +43,7 @@ const StyleRecordItem = styled.div`
     display: inline-block;
     min-width: 0;
     max-width: 100%;
+    will-change: transform;
     transition: transform 1s ease-out;
   }
 
@@ -69,16 +73,30 @@ export default function RecordItem({ item
   //, memo
 }) {
   //상세보기 길이판단
-  const [onDetailMode, setOnDetailMode] = useState(false);
+  const [onDetailMode, setOnDetailMode] = useState('closed');
 
   const detailRef = useRef(null);
 
-  function closeDetail() {
-    setOnDetailMode(false)
+  function openDetail() {
+    setOnDetailMode('open');
   }
+
+  function closeDetail() {
+    setOnDetailMode('closing');
+  }
+
   useHandleClickOutside(detailRef, () => {
-    if (onDetailMode) closeDetail();  // 밖을 클릭했을 때만 끄기
-  }, onDetailMode);
+    if (onDetailMode === 'open') closeDetail();  // 밖을 클릭했을 때만 끄기
+  }, onDetailMode === 'open');
+
+   useEffect(() => {
+    if (onDetailMode === 'closing') {
+      const timer = setTimeout(() => {
+        setOnDetailMode('closed');
+      }, 500); // transition-duration과 동일하게 맞춤
+      return () => clearTimeout(timer);
+    }
+  }, [onDetailMode]);
 
   // marquee 애니메이션 관리를 위한 길이 판단
   const [isLabelOverflow, setIsLabelOverflow] = useState(false);
@@ -119,10 +137,10 @@ export default function RecordItem({ item
         '--labelSlide': `${labelSlide}px`,
         '--valueSlide': `${valueSlide}px`,
       }}
-      onClick={() => setOnDetailMode(true)}
+      onClick={onDetailMode === 'closed' ? openDetail : undefined}
       ref={detailRef}
     >
-      {!onDetailMode ? (
+      {onDetailMode == 'closed' ? (
         <>
           <div className={`Ilabel ${isLabelOverflow ? 'overflowed' : ''}`}>
             <span ref={labelRef}>{item.category}</span>
@@ -133,6 +151,7 @@ export default function RecordItem({ item
         </>
       ) :
         <ItemLog
+          setOnDetailMod={() => setOnDetailMode('closing')}
           category={item.category}
           amount={item.amount}
         />

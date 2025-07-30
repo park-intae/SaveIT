@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "re
 import styled, { keyframes } from "styled-components";
 import close from "@assets/close.svg";
 import add from "@assets/add.svg";
+import ButtonGroup from "@component/styleComponent/ButtonGroup";
 import { postExpense } from "@api/expense";
 import useWeeklyStore from "@stores/useWeeklyStore";
 import { postSave } from "@api/save";
@@ -124,6 +125,7 @@ const StyledInputForm = styled.form`
         margin: auto;      
       }
     }
+
   }
 `;
 
@@ -236,14 +238,14 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef, date
           placeholder="메모를 작성해주세요"
         />
       </article>
-      <div className="button-group">
-        <button type="button" className="toolkit" onClick={handleCloseClick}>
+      <ButtonGroup>
+        <button type="button" onClick={handleCloseClick}>
           <img src={close}></img>
         </button>
         <button type="button" className="toolkit" onClick={handleAddClick}>
           <img src={add}></img>
         </button>
-      </div>
+      </ButtonGroup>
     </StyledInputForm>
   )
 });
