@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 
 const StyleSumm = styled.article`
@@ -37,22 +38,21 @@ const StyleSumm = styled.article`
         gap: 7px;
     }
 `
-export default function RecordSumm({ entries }) {
-    const totalConsumption = entries
-        .filter(ent => ent.kind == '소비')
-        .reduce((sum, ent) => sum + ent.amount, 0);
-
-    const totalSaving = entries
-        .filter(ent => ent.kind == '저축')
-        .reduce((sum, ent) => sum + ent.amount, 0);
+export default function RecordSumm({ expense, save }) {
+  const totalExpense = useMemo(() => {
+    return expense.reduce((sum, e) => sum + e.amount, 0);
+  }, [expense]);
 
 
+  const totalSave = useMemo(() => {
+    return save.reduce((sum, e) => sum + e.amount, 0);
+  }, [save]);
 
     return (
         <StyleSumm className="summary">
-            {/* <h3>{date}</h3> */}
-            <p className="exspand"><span className="label">소비</span> <span className="value">₩ {totalConsumption.toLocaleString()}</span></p>
-            <p className="saving"><span className="label">저축</span> <span className="value">₩ {totalSaving.toLocaleString()}</span></p>
+            <p className="exspand"><span className="label">소비</span> <span className="value">₩{totalExpense}</span></p>
+            <p className="saving"><span className="label">저축</span> <span className="value">₩{totalSave}</span></p>
+
         </StyleSumm>
     )
 }

@@ -47,7 +47,7 @@ const StyleLog = styled.article`
   }
 `;
 
-export default function RecordLog({ entries = [] }) {
+export default function RecordLog({ expense, save, date, offset}) {
   // 입력창 여닫기를 위한 판단
   const [showInput, setShowInput] = useState(false);
 
@@ -89,17 +89,28 @@ export default function RecordLog({ entries = [] }) {
   //   }
   // }, [showInput])
 
+
   return (
     <StyleLog className="log">
-      {entries.length > 0 && (
-        <ul>
-          {entries.map((item, i) => (
-            <li key={i}>
-              <RecordItem {...item} />
-            </li>
-          ))}
-        </ul>
-      )}
+      {expense.length > 0 && (
+              <ul>
+                {expense.map((item, i) => (
+                  <li key={i} style={{border:"1px solid red", borderRadius: "8px"}}>
+                    <RecordItem item={item} />
+                  </li>
+                ))}
+              </ul>
+            )}
+      
+            {save.length > 0 && (
+              <ul>
+                {save.map((item, i) => (
+                  <li key={i} style={{border:"1px solid green", borderRadius: "8px"}}>
+                    <RecordItem item={item} />
+                  </li>
+                ))}
+              </ul>
+            )}
 
       <button className="addButton" onClick={toggleInput}>
         <img className="buttonImg" src={add} />
@@ -108,6 +119,8 @@ export default function RecordLog({ entries = [] }) {
         <InputItem ref={inputComponentRef}
           exposeDomRef={handleExposeDomRef}
           onReqClose={closeInput}
+          date={date}
+          offset={offset}
         />
       }
     </StyleLog>

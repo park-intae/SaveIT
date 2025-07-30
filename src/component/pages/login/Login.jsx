@@ -5,6 +5,7 @@ import axios from "axios";
 import { useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import useTokenStore from '@stores/useTokenStore';
 import logo from "@assets/login_logo.svg";
 import { ResponsiveContext } from "@context/ResponsiveContext";
 import Quote from "./Quote";
@@ -87,6 +88,7 @@ const FootRight = styled.div`
 function Login() {
   const {isMobile, isTablet} = useContext(ResponsiveContext);
   const navigate = useNavigate();
+  const { setToken } = useTokenStore();
   // const [quote, setQuote] = useState(null);
 
   // useEffect(() => {
@@ -123,7 +125,8 @@ function Login() {
       );
 
       const jwt = res.data.jwt;
-      localStorage.setItem('jwt', jwt);
+      // localStorage.setItem("jwt", jwt);
+      setToken(jwt);
       alert('로그인 성공!');
 
       const userRes = await axios.get('http://localhost:8080/user/info', {

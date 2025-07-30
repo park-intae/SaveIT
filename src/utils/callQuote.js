@@ -13,6 +13,7 @@ async function CallQuote(tags = [], limit = 10) {
     return res.data.map((q) => ({
       content: q.content,
       author: q.author,
+
     }));
   } catch (err) {
     console.error('명언들 불러오기 실패:', err.message);

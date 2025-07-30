@@ -1,13 +1,14 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { addDate, getDateString } from '../utils/dateUtil';
 
-export default function useAddItem(dateArray, setDateArray, maxCount = 5) {
+export default function useAddItem(dateArray, setDateArray, maxCount = 5, offset, setOffset) {
   const containerRef = useRef(null);
 
   // 이전 날짜 데이터 추가
   const addPrevDate = () => {
     const first = new Date(dateArray[0]);
     const newDate = getDateString(addDate(first, -1));
+    setOffset(prev => prev -1);
     if (dateArray.includes(newDate)) return;
 
     setDateArray((prev) => {
@@ -20,6 +21,7 @@ export default function useAddItem(dateArray, setDateArray, maxCount = 5) {
   const addNextDate = () => {
     const last = new Date(dateArray[dateArray.length - 1]);
     const newDate = getDateString(addDate(last, 1));
+    setOffset(prev => prev +1);
     if (dateArray.includes(newDate)) return;
 
     setDateArray((prev) => {
