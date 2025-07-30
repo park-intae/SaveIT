@@ -107,10 +107,9 @@ function Login() {
 
   const handleLoginSuccess = async (credentialResponse) => {
     const idToken = credentialResponse.credential;
-    console.log('idToken:', idToken);
     try {
       const res = await axios.post(
-        'http://localhost:8080/auth/google',
+        'http://saveit-production.up.railway.app/auth/google',
         { token: idToken },
         {
           headers: {
