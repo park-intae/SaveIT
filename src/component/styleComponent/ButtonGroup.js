@@ -14,22 +14,14 @@ const ButtonGroup = styled.div`
       display: flex;
       justify-content: center;
       align-content: center;
+      background-color: transparent;
+      transition: transform 0.3s ease-in-out;
       
         img{
             margin: auto;      
         }
-    }
-        
-    .close {
-        border: 2px solid #F5866E;
-        background-color: white;
-    
-        &:hover{ 
-            background-color: #f5866e;
-                
-            img{
-                filter: invert(100%);
-            }
+        &:hover{
+            transform: scale(1.2);
         }
     }
 `;

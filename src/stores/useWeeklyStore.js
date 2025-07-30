@@ -5,7 +5,7 @@ import { getExpense } from '../api/expense';
 import { getSave } from '../api/save';
 
 const useWeeklyStore = create((set) => ({
-    // weeklyRecords: [],
+    weeklyRecords: [],
     expenseData: [],
     saveData:[],
     isLoadingExpense: false,

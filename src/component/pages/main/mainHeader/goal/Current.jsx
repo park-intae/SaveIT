@@ -1,3 +1,5 @@
+import { ResponsiveContext } from "@context/ResponsiveContext"
+import { useContext } from "react"
 import alter from '@assets/pencil.svg'
 import styled from 'styled-components';
 
@@ -7,25 +9,30 @@ import { getUserGoal, getUserSave, postUserGoal } from "@api/goal.js";
 
 const StyleCurrent = styled.div`
     p {
-        font-size: 18px;
+        font-size: ${({ $isMobile, $isTablet }) => ($isMobile ? "16px" : $isTablet ? "16px" : "18px")};
     }
     .goalSummary {
-        font-size: 28px;
+        font-size: ${({ $isMobile, $isTablet }) => ($isMobile ? "24px" : $isTablet ? "24px" : "28px")};
         font-weight: bold;
         padding: 8px 0 15px;
+        display: flex;
+        align-items: baseline;
+        gap: 5px;
     }
     span{
         font-size: 15px;
         color: #888;
     }
     .alter {
-        width: 16px;
+        display: inline-block;
+        width: 20px;
         cursor: pointer;
+        margin: auto 0;
     }
     .progressBar {
         background-color: #eee;
         border-radius: 999px;
-        height: 14px;
+        height: 18px;
         position: relative;
         overflow: hidden;
         margin-bottom: 12px;
@@ -50,6 +57,8 @@ const StyleCurrent = styled.div`
 `
 
 export default function Current() {
+  const {isMobile, isTablet} = useContext(ResponsiveContext);
+
 
   const [visual, setVisual] = useState(false)
   const [inputGoal, setInputGoal] = useState("")
@@ -154,7 +163,11 @@ export default function Current() {
         
       </div>
 
-      <div className="progressBar"></div>
+      {/* <div className='progressBar'>
+          <div className='fill' style={{ width: `${percent}%` }} />
+          <div className='percentText'>{percent}%</div>
+      </div> */}
+
     </div>
     </StyleCurrent>
     

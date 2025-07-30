@@ -7,9 +7,11 @@
 }
 
 /* 공통 */
+body{
+  background-color: #F8F9FA;
+}
 body textarea{
   font-family: 'Pretendard-Regular';
-  background-color: #F8F9FA;
   color: #212529;
 }
 * {

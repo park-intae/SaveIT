@@ -41,11 +41,14 @@ const StyleProfile = styled.img`
   height: clamp(18px, 4vw, 28px);
   `
 const StyleUserInfo = styled.div`
-display: flex;
-align-items: center;
-gap: 8px;
-font-size: 14px;
-white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+
+  p{
+    font-size: ${({ $isMobile, $isTablet }) => $isMobile ? "13px" : $isTablet ? "13px" : "15px"};
+  }
 `
 
 export default function Header() {
@@ -65,7 +68,7 @@ export default function Header() {
                 )}
             </StyleCenter>
             <StyleRight $isMobile={isMobile} className='login'>
-                <StyleUserInfo>
+                <StyleUserInfo $isMobile={isMobile} $isTablet={isTablet}>
                   <StyleProfile className="profile" src={profile} />
 
                   <p>{name}님, 환영합니다!</p>

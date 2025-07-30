@@ -1,3 +1,5 @@
+import { ResponsiveContext } from "@context/ResponsiveContext"
+import { useContext } from "react"
 import { addDate, getDateString } from "@utils/dateUtil";
 import { useEffect, useMemo, useState } from "react";
 import TableCard from "@component/styleComponent/TableCard";
@@ -7,7 +9,11 @@ import TableRecord from "./tableRecord/TableRecord";
 import SlipDateButton from "../../../../styleComponent/SlipDateButton";
 
 export default function Table() {
-  const { fetchSave, fetchExpense, isLoadingExpense,
+  //캘린더 반응형에 따른 갯수
+  const { isMobile, isTablet } = useContext(ResponsiveContext);
+  const visibleCount = isMobile ? 1 : isTablet ? 3 : 5;
+
+  const { weeklyRecords, fetchSave, fetchExpense, isLoadingExpense,
     isLoadingSave, error } = useWeeklyStore();
   const expenseData = useWeeklyStore((state) => state.expenseData);
   const saveData = useWeeklyStore((state) => state.saveData);
@@ -20,13 +26,14 @@ export default function Table() {
   // 처음 랜더링될 때 기준 상태
   const [date, setDate] = useState(() => {
     const arr = [];
-    for (let i = -2; i <= 2; i++) {
+    const half = Math.floor(visibleCount / 2);
+    for (let i = -half; i <= half; i++) {
       arr.push(getDateString(addDate(today, i)));
     }
     return arr;
   });
 
-  const { addPrevDate, addNextDate } = useAddItem(date, setDate, 5, offset, setOffset); // 날짜 추가/제거 상태 관리
+  const { addPrevDate, addNextDate } = useAddItem(date, setDate, visibleCount, offset, setOffset); // 날짜 추가/제거 상태 관리
 
   // 캘린더 비동기화
   useEffect(() => {  
@@ -46,6 +53,33 @@ export default function Table() {
     };
     getData();
   }, [offset]);
+
+  // 반응형 캘린더 갯수 조절
+  useEffect(() => {
+    const half = Math.floor(visibleCount / 2);
+    const newDates = [];
+    for (let i = -half; i <= half; i++) {
+      newDates.push(getDateString(addDate(today, i)));
+    }
+    setDate(newDates);
+  }, [visibleCount, today]);
+
+  // 데이터 기록 수신
+  // const dateRecords = useMemo(() => {
+  //   const map = {};
+  //   weeklyRecords.forEach((res) => {
+  //     const { year, month, date } = res.date;
+  //     const dateObj = new Date(year, month - 1, date);
+  //     const key = getDateString(dateObj);
+  //     if (!map[key]) {
+  //       map[key] = [];
+  //     }
+  //     map[key].push(...res.entries);
+  //   });
+  //   return map;
+  // }, [weeklyRecords]);
+
+
 
 
   if (isLoadingExpense || isLoadingSave ) return '데이터를 불러오는 중입니다';

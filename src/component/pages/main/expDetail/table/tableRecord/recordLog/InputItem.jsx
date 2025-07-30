@@ -45,7 +45,7 @@ const StyledInputForm = styled.form`
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 
   h3 {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     margin: 0;
   }
@@ -78,11 +78,11 @@ const StyledInputForm = styled.form`
     }
 
     label:first-of-type {
-      border-color: #EF8479; /* 연핑크 */
+      border-color: #e74c3c;
     }
 
     label:last-of-type {
-      border-color: #b0eac8; /* 연초록 */
+      border-color: #27ae60;
     }
 
     input[type="radio"]:first-of-type:checked + label {
@@ -99,7 +99,7 @@ const StyledInputForm = styled.form`
   select,
   input[type="number"],
   textarea {
-    border: 1px solid #b2c7f8;
+    border: 1px solid #2F80ED;
     border-radius: 6px;
     padding: 5px;
     font-size: 12px;

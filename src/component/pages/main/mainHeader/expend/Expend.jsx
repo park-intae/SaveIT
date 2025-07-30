@@ -10,7 +10,7 @@ const ExpCard = styled(StyleCard)`
   flex-direction: ${({ $isMobile }) => ($isMobile ? "column" : "row")};
   justify-content: space-between;
   align-items: center;
-  gap: 40px;
+  gap: ${({ $isTablet }) => ($isTablet ? "20px" : "40px")};
   width: 100%;
 `
 
