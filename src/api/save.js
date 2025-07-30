@@ -1,11 +1,13 @@
 import axios from "axios";
 import useTokenStore from "@stores/useTokenStore";
 
+const API_ADDRESS = 'saveit-production.up.railway.app';
+
 export async function getSave(offset = 0) {
     const token = useTokenStore.getState().token;
-
+    
     try {
-        const response = await axios.get(`http://localhost:8080/api/save?offset=${offset}`, {
+        const response = await axios.get(`https://${API_ADDRESS}/api/save?offset=${offset}`, {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -14,14 +16,21 @@ export async function getSave(offset = 0) {
 
         return response.data;
     } catch (error) {
-        throw new Error("서버 오류");
+    console.error("getSave 에러:", error);
+
+    const message =
+      error.response?.data?.message ||
+      error.message ||
+      "서버 오류";
+
+    throw new Error(message);
     }
 }
 
 export async function postSave(day, kind, category, amount) {
     const token = useTokenStore.getState().token;
 
-    const response = await fetch("http://localhost:8080/api/save?", {
+    const response = await fetch(`https://${API_ADDRESS}/api/save`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,

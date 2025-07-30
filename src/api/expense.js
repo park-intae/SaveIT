@@ -14,7 +14,14 @@ export async function getExpense(offset = 0) {
 
         return response.data;
     } catch (error) {
-        throw new Error("서버 오류");
+    console.error("getSave 에러:", error);
+
+    const message =
+      error.response?.data?.message ||
+      error.message ||
+      "서버 오류";
+
+    throw new Error(message);
     }
 }
 
