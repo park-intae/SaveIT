@@ -1,5 +1,5 @@
 import { addDate, getDateString } from "@utils/dateUtil";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import TableCard from "@component/styleComponent/TableCard";
 import useAddItem from "@hooks/useAddItem";
 import useWeeklyStore from "@stores/useWeeklyStore";

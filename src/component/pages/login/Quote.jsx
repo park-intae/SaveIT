@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const slideLeft = keyframes`
-    0%{transform: translateX(70%);}
+    0%{transform: translateX(10%);}
     100%{transform: translateX(-100%);}
 `;
 
