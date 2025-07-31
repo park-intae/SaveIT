@@ -5,6 +5,8 @@ import ButtonGroup from "@component/styleComponent/ButtonGroup";
 import styled from "styled-components";
 import close from "@assets/close.svg";
 import edit from "@assets/edit.svg";
+import { deleteExpense } from "@api/expense";
+import useWeeklyStore from "@stores/useWeeklyStore";
 
 const StyleItemDetail = styled.div`
     margin: 0;
@@ -78,10 +80,17 @@ const StyleToggleBtn = styled.label`
     }
 `
 
-export default function ItemLog({ setOnDetailMod, category, amount
+export default function ItemLog({ setOnDetailMod, category, amount, expenseId, offset
     // , memo
 }) {
     const [isModify, setIsModify] = useState(false);
+    const { fetchExpense, fetchSave } = useWeeklyStore();
+
+    async function deleteExpenseItem(expenseId, offset) {
+        await deleteExpense(expenseId);
+        await fetchExpense(offset);
+    }
+
 
     return (
         <StyleItemDetail>
@@ -107,7 +116,7 @@ export default function ItemLog({ setOnDetailMod, category, amount
             <ButtonGroup>
                 {isModify && <button onClick={() => setOnDetailMod('closing')} ><img src={edit} className="edit"/></button>}
                 <button onClick={()=>setOnDetailMod('closing')} className="close">
-                    <img src={close} />
+                    <img src={close} onClick={() => deleteExpenseItem(expenseId, offset)} />
                 </button>
             </ButtonGroup>
         </StyleItemDetail>

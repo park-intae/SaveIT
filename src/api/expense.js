@@ -11,7 +11,7 @@ export async function getExpense(offset = 0) {
             'Content-Type': 'application/json'
             }
         });
-
+        // console.log(response.data)
         return response.data;
     } catch (error) {
         throw new Error("서버 오류");
@@ -35,4 +35,25 @@ export async function postExpense(day, kind, category, amount) {
         } 
     
         return await response.json()
+
+        
+}
+
+
+export async function deleteExpense(expenseId) {
+    const token = useTokenStore.getState().token;
+
+    try {
+        const response = await axios.delete(`http://localhost:8080/api/expense/delete`, {
+            params: { expenseId },
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("DELETE 요청 실패", error);
+        throw new Error("삭제 실패");
+    }
 }

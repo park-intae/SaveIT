@@ -96,7 +96,7 @@ export default function RecordLog({ expense, save, date, offset}) {
               <ul>
                 {expense.map((item, i) => (
                   <li key={i} style={{border:"1px solid red", borderRadius: "8px"}}>
-                    <RecordItem item={item} />
+                    <RecordItem item={item} offset={offset}/>
                   </li>
                 ))}
               </ul>
@@ -106,7 +106,7 @@ export default function RecordLog({ expense, save, date, offset}) {
               <ul>
                 {save.map((item, i) => (
                   <li key={i} style={{border:"1px solid green", borderRadius: "8px"}}>
-                    <RecordItem item={item} />
+                    <RecordItem item={item} offset={offset}/>
                   </li>
                 ))}
               </ul>

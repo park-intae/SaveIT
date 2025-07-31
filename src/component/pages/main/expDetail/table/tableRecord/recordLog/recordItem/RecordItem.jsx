@@ -69,7 +69,7 @@ const StyleRecordItem = styled.div`
 `;
 
 // memo 주석 효과 지워야됨
-export default function RecordItem({ item
+export default function RecordItem({ item, offset
   //, memo
 }) {
   //상세보기 길이판단
@@ -154,6 +154,8 @@ export default function RecordItem({ item
           setOnDetailMod={() => setOnDetailMode('closing')}
           category={item.category}
           amount={item.amount}
+          expenseId={item.expenseId}
+          offset={offset}
         />
       }
     </StyleRecordItem>
