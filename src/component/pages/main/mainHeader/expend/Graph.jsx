@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import styled from "styled-components";
-
 const StyleExpGraph = styled.article`
   display: flex;
   justify-content: center;
@@ -12,7 +11,6 @@ const StyleExpGraph = styled.article`
   max-width: 240px;
   width: 100%;
 `;
-
 export default function Graph() {
   const [state, setState] = useState({
     series: [],
@@ -86,7 +84,6 @@ export default function Graph() {
       },
     },
   });
-
   useEffect(() => {
     axios
       .post(
@@ -102,7 +99,6 @@ export default function Graph() {
         const newSeries = res.data.series;
         const newLabels = res.data.labels;
         const newRatio = res.data.ratio;
-
         const updatedOptions = {
           ...state.options,
           labels: newLabels,
@@ -120,11 +116,10 @@ export default function Graph() {
             ...state.options.dataLabels,
             formatter: (_, options) => {
               const label = newLabels?.[options.seriesIndex] ?? "";
-              return label; 
+              return label;
             },
           },
         };
-
         setState({
           series: newSeries,
           ratio: newRatio,
@@ -135,7 +130,6 @@ export default function Graph() {
         console.log("실패:", err);
       });
   }, []);
-
   return (
     <StyleExpGraph>
       <ReactApexChart

@@ -28,17 +28,17 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://saveit-production.up.railway.app',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
       },
       '/auth': {
-        target: 'http://saveit-production.up.railway.app',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
       },
       '/user': {
-        target: 'http://saveit-production.up.railway.app',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
       },

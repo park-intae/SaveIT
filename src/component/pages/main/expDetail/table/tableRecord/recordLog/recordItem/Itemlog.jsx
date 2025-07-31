@@ -5,6 +5,10 @@ import ButtonGroup from "@component/styleComponent/ButtonGroup";
 import styled from "styled-components";
 import close from "@assets/close.svg";
 import edit from "@assets/edit.svg";
+import deleteIco from "@assets/delete.svg";
+import useWeeklyStore from "@stores/useWeeklyStore";
+import { deleteExpense } from "@api/expense";
+import { deleteSave } from "@api/save";
 
 const StyleItemDetail = styled.div`
     margin: 0;
@@ -78,11 +82,65 @@ const StyleToggleBtn = styled.label`
     }
 `
 
-export default function ItemLog({ setOnDetailMod, category, amount
-    // , memo
-}) {
+export default function ItemLog({ setOnDetailMod, item }) {
     const [isModify, setIsModify] = useState(false);
+    const [category, setCategory] = useState(item.category);
+    const [amount, setAmount] = useState(item.amount);
 
+    const updateExpense = useWeeklyStore((state) => state.updateExpense);
+    const updateSave = useWeeklyStore((state) => state.updateSave);
+
+    const handleCategory = (e) => {
+        setCategory(e.target.value);
+    }
+
+    const handleMoney = (e) => {
+        setAmount(e.target.value);
+    }
+
+    const handleSave = async () => {
+        const payload = {
+            category,
+            amount: Number(amount),
+            [item.kind === "EXPENSE" ? "expenseDate" : "saveDate"]: item.date,
+            kind: item.kind,
+        };
+
+        try {
+            if (item.kind === "EXPENSE") {
+                await updateExpense(item.id, payload);
+            } else {
+                await updateSave(item.id, payload);
+            }
+            setIsModify(false);
+            setOnDetailMod("closing");
+        } catch (err) {
+            alert("수정 실패:", err);
+        }
+    };
+
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
+        if (!confirmDelete) return;
+
+        try {
+            if (item.kind === "EXPENSE") {
+                await deleteExpense(item.id);
+            } else {
+                await deleteSave(item.id);
+            }
+            setOnDetailMod("closing");
+        } catch (err) {
+            alert("삭제 실패: " + err.message);
+        }
+    }
+
+    const hadleClose = () => {
+        setCategory(item.category);
+        setAmount(item.amount);
+        setIsModify(false);
+        setOnDetailMod("closing");
+    }
     return (
         <StyleItemDetail>
             <StyleToggleBtn className="toggleBtn">
@@ -98,15 +156,35 @@ export default function ItemLog({ setOnDetailMod, category, amount
                     </article>
                 ) : (
                     <article>
-                        <input placeholder={category} />
-                        <input placeholder={amount} />
+                        <select id="category" value={category} onChange={handleCategory}>
+                            <option value="" disabled>카테고리</option>
+                            <option value="식비">식비</option>
+                            <option value="주거비">주거비</option>
+                            <option value="교통비">교통비</option>
+                            <option value="생활용품">생활용품</option>
+                            <option value="문화생활">문화생활</option>
+                            <option value="경조사비">경조사비</option>
+                            <option value="통신비">통신비</option>
+                            <option value="건강/의료비">건강/의료비</option>
+                        </select>
+                        <input
+                            type="number"
+                            value={amount}
+                            onChange={handleMoney}
+                            placeholder={String(item.amount)} />
                         {/* <textarea placeholder={memo}/> */}
                     </article>
                 )
             }
             <ButtonGroup>
-                {isModify && <button onClick={() => setOnDetailMod('closing')} ><img src={edit} className="edit"/></button>}
-                <button onClick={()=>setOnDetailMod('closing')} className="close">
+                {isModify
+                    &&
+                    <>
+                        <button onClick={handleSave} className="edit"><img src={edit} /></button>
+                        <button onClick={handleDelete} className="delete"><img src={deleteIco} /></button>
+                    </>
+                }
+                <button onClick={hadleClose} className="close">
                     <img src={close} />
                 </button>
             </ButtonGroup>
