@@ -14,7 +14,9 @@ const StyleComment = styled.article`
   }
   p{
     font-size: 15px;
-    padding: 18px 0;
+    padding: 4px 0;
+    line-hight:1.4;
+    margin:0;
   }
   span{
     font-size: 13px;
