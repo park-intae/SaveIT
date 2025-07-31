@@ -186,8 +186,9 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef, date
       alert("다 채워주세요")
     } else if (kind === "소비") {
       try {
-        const kind = 1
-        const result = await postExpense(day, kind, category, amount)
+        const kind = 1;
+        // const result = 
+        await postExpense(day, kind, category, amount);
         // console.log("서버 응답: ", result);
         fetchExpense(offset);
       } catch (err) {
@@ -196,8 +197,9 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef, date
 
     } else if(kind === "저축") {
       try {
-        const kind = 0
-        const result = await postSave(day, kind, category, amount)
+        const kind = 0;
+        // const result = 
+        await postSave(day, kind, category, amount);
         // console.log("서버 응답: ", result);
         fetchSave(offset);
       } catch (err) {
@@ -231,12 +233,12 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef, date
           <option value="건강/의료비">건강/의료비</option>
         </select>
         <input id="money" type="number" placeholder="금액 입력란" onChange={handleMoney}/>
-        <textarea
+        {/* <textarea
           id="memo"
           rows={3}
           maxLength={30}
           placeholder="메모를 작성해주세요"
-        />
+        /> */}
       </article>
       <ButtonGroup>
         <button type="button" onClick={handleCloseClick}>

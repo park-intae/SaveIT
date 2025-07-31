@@ -2,11 +2,12 @@
 
 import  useTokenStore  from "@stores/useTokenStore"
 
+const API_ADDRESS = 'localhost:8080';
 
 export async function getUserExpense() {
   const token = useTokenStore.getState().token;
 
-  const response = await fetch("http://localhost:8080/api/goal/expense", {
+  const response = await fetch(`http://${API_ADDRESS}/api/goal/expense`, {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`,
@@ -21,7 +22,7 @@ export async function getUserExpense() {
 export async function getUserSave() {
   const token = useTokenStore.getState().token;
 
-  const response = await fetch("http://localhost:8080/api/goal/save", {
+  const response = await fetch(`http://${API_ADDRESS}/api/goal/save`, {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`,
@@ -36,7 +37,7 @@ export async function getUserSave() {
 export async function getUserGoal() {
   const token = useTokenStore.getState().token;
 
-  const response = await fetch("http://localhost:8080/api/goal", {
+  const response = await fetch(`http://${API_ADDRESS}/api/goal`, {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`,
@@ -51,7 +52,7 @@ export async function getUserGoal() {
 export async function postUserGoal(goal_amount) {
     const token = useTokenStore.getState().token;
 
-    const response = await fetch("http://localhost:8080/api/goal", {
+    const response = await fetch(`http://${API_ADDRESS}/api/goal`, {
         method: "POST",
         headers: {
             "Authorization": `Bearer ${token}`,

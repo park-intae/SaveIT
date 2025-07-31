@@ -2,7 +2,7 @@
 
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { useContext} from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useTokenStore from '@stores/useTokenStore';
@@ -23,7 +23,7 @@ const LoginLogo = styled.div`
 `;
 const StyleLogo = styled.img`
   display: block;
-  width: ${({$isMobile})=>($isMobile ? '70%' : 'auto')};
+  width: ${({ $isMobile }) => ($isMobile ? '70%' : 'auto')};
   height: auto;
   margin: 0 auto;
 `;
@@ -38,16 +38,16 @@ const LoginFooter = styled.footer`
   max-width: 1024px;
   width: 100%;
   margin: 50px auto 20px;
-  padding: ${({$isMobile, $isTablet})=>
+  padding: ${({ $isMobile, $isTablet }) =>
     $isMobile ? "16px" : $isTablet ? "24px" : "20px 48px"};
   border-top: 1px solid #e0e0e0;
   display: flex;
-  justify-content: ${({isMobile, isTablet}) =>
+  justify-content: ${({ isMobile, isTablet }) =>
     isMobile || isTablet ? "center" : "space-between"};
   flex-wrap: wrap;
   font-size: 13px;
   line-height: 1.5;
-  text-align: ${({$isMobile, $isTablet}) =>
+  text-align: ${({ $isMobile, $isTablet }) =>
     $isMobile || $isTablet ? "center" : "left"};
 
   p {
@@ -67,12 +67,12 @@ const FootRight = styled.div`
     $isMobile || $isTablet ? "center" : "flex-end"};
   text-align: ${({ $isMobile, $isTablet }) =>
     $isMobile || $isTablet ? "center" : "right"};
-  font-size: ${({$isMobile})=>($isMobile ? "9px" : "13px")};
+  font-size: ${({ $isMobile }) => ($isMobile ? "9px" : "13px")};
   margin-top: auto;
 
   p{
     display: ${({ $isMobile, $isTablet }) =>
-      $isMobile || $isTablet ? "none" : "block"};
+    $isMobile || $isTablet ? "none" : "block"};
   }
 
   span {
@@ -82,9 +82,9 @@ const FootRight = styled.div`
   }
 `;
 function Login() {
-  const {isMobile, isTablet} = useContext(ResponsiveContext);
+  const { isMobile, isTablet } = useContext(ResponsiveContext);
   const navigate = useNavigate();
-  const { setToken } = useTokenStore();
+  const { setToken} = useTokenStore();
   // const [quote, setQuote] = useState(null);
 
   // useEffect(() => {
@@ -107,7 +107,6 @@ function Login() {
 
   const handleLoginSuccess = async (credentialResponse) => {
     const idToken = credentialResponse.credential;
-    console.log('idToken:', idToken);
     try {
       const res = await axios.post(
         'http://localhost:8080/auth/google',
@@ -152,7 +151,7 @@ function Login() {
       </LoginBtn>
       <Quote />
       <LoginFooter $isMobile={isMobile} $isTablet={isTablet}>
-          <FootLeft $isMobile={isMobile} $isTablet={isTablet}>
+        <FootLeft $isMobile={isMobile} $isTablet={isTablet}>
           <p>
             (주)세이빗 | 대표 Thein 2Team
             <br />
